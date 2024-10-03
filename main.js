@@ -49,7 +49,9 @@ function main() {
 			const astToBytecode = new ASTToBytecode();
 			const instructions = astToBytecode.convert(ast);
 			if (instructions.length === 0) {
-				console.error("Error: No instructions generated. The input may be empty or invalid.");
+				console.error(
+					"Error: No instructions generated. The input may be empty or invalid.",
+				);
 			} else {
 				const serializer = new BytecodeSerializer();
 				const bytecode = serializer.serialize(instructions);
