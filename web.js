@@ -110,9 +110,9 @@ function initializeDebugger(bytecode) {
 
 function updateDebuggerUI(debuggerInstance) {
 	const stackList = debuggerInstance.stack
-		.map((value, index) => `<li>${index}: ${value}</li>`)
+		.map((value) => `<li>${value}</li>`)
 		.join("");
-	document.getElementById("debuggerStack").innerHTML = `<ul>${stackList}</ul>`;
+	document.getElementById("debuggerStack").innerHTML = `Stack: <ul>${stackList}</ul>`;
 	for (const el of document.querySelectorAll('[id^="bytecode-"]')) {
 		el.classList.remove("bg-yellow-200");
 	}
