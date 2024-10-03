@@ -33,7 +33,7 @@ describe('REPL', () => {
     });
 
     it('should exit on "exit" command', (done) => {
-        const repl = spawn('node', ['main.js']);
+        const repl = spawn('bun', ['main.js'], { stdio: 'pipe' });
 
         repl.on('close', (code) => {
             expect(code).toBe(0);
