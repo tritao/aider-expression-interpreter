@@ -3,8 +3,7 @@ import Module from "./c/bytecode_runner.mjs";
 class BytecodeWasmInterpreter {
 	constructor() {
 		this.instance = null;
-		const memory = new Uint8Array(this.instance.memory.buffer);
-		memory.set(bytecode, 0);
+		this.instance = new Module.BytecodeInterpreter();
 	}
 
 	async init(bytecode) {
