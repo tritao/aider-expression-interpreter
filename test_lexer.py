@@ -5,7 +5,7 @@ class TestLexer(unittest.TestCase):
     def test_single_number(self):
         lexer = Lexer("42")
         tokens = lexer.tokenize()
-        expected_tokens = [Token('NUMBER', 42)]
+        expected_tokens = [Token('NUMBER', 42), Token('EOF', None)]
         self.assertEqual(tokens, expected_tokens)
 
     def test_simple_addition(self):
@@ -15,6 +15,7 @@ class TestLexer(unittest.TestCase):
             Token('NUMBER', 3),
             Token('PLUS', '+'),
             Token('NUMBER', 5)
+        Token('EOF', None)
         ]
         self.assertEqual(tokens, expected_tokens)
 
@@ -25,8 +26,9 @@ class TestLexer(unittest.TestCase):
             Token('NUMBER', 7),
             Token('MINUS', '-'),
             Token('NUMBER', 2),
-            Token('MUL', '*'),
-            Token('NUMBER', 3)
+            Token('TIMES', '*'),
+            Token('NUMBER', 3),
+            Token('EOF', None)
         ]
         self.assertEqual(tokens, expected_tokens)
 
@@ -39,8 +41,9 @@ class TestLexer(unittest.TestCase):
             Token('PLUS', '+'),
             Token('NUMBER', 2),
             Token('RPAREN', ')'),
-            Token('MUL', '*'),
-            Token('NUMBER', 4)
+            Token('TIMES', '*'),
+            Token('NUMBER', 4),
+            Token('EOF', None)
         ]
         self.assertEqual(tokens, expected_tokens)
 
@@ -50,7 +53,8 @@ class TestLexer(unittest.TestCase):
         expected_tokens = [
             Token('NUMBER', 9),
             Token('PLUS', '+'),
-            Token('NUMBER', 10)
+            Token('NUMBER', 10),
+            Token('EOF', None)
         ]
         self.assertEqual(tokens, expected_tokens)
 
@@ -65,7 +69,8 @@ class TestLexer(unittest.TestCase):
         expected_tokens = [
             Token('NUMBER', 3.14),
             Token('PLUS', '+'),
-            Token('NUMBER', 2.71)
+            Token('NUMBER', 2.71),
+            Token('EOF', None)
         ]
         self.assertEqual(tokens, expected_tokens)
 
