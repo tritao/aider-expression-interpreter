@@ -5,7 +5,7 @@ Module().then(instance => {
     // The instance object is the compiled WebAssembly module
     console.log('WASM Module loaded:', instance.BytecodeInterpreter);
 
-    const bytecode = new Uint8Array([1, 10, 1, 20, 2, 0]); // Example bytecode: PUSH 10, PUSH 20, ADD, HALT
+    const bytecode = new Uint8Array([1, 10, 1, 20, 2, 6]); // Example bytecode: PUSH 10, PUSH 20, ADD, HALT
     const interpreter = new instance.BytecodeInterpreter();
     interpreter.init(bytecode);
 
