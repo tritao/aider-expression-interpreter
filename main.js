@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
