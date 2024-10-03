@@ -39,10 +39,7 @@ async function evaluateExpression(expression, interpreterType) {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-		const serializer = new BytecodeSerializer();
-		const serializedBytecode = serializer.serialize(bytecode);
-
-		const result = await executeBytecode(serializedBytecode, interpreterType);
+		const result = await executeBytecode(bytecode, interpreterType);
 
 		const astTree = renderAST(ast);
 		const bytecodeStack = renderBytecodeStack(bytecode);
@@ -77,7 +74,9 @@ async function executeBytecode(bytecode, interpreterType = "js") {
 			await import("./bytecode-wasm-interpreter.js")
 		).BytecodeWasmInterpreter;
 		const interpreter = new BytecodeWasmInterpreter();
-		await interpreter.init(bytecode);
+		const serializer = new BytecodeSerializer();
+		const serializedBytecode = serializer.serialize(bytecode);
+		await interpreter.init(serializedBytecode);
 		result = interpreter.execute();
 	} else {
 		throw new Error(`Unknown interpreter type: ${interpreterType}`);
