@@ -82,9 +82,15 @@ function renderAST(node, depth = 0) {
 }
 
 function renderBytecodeStack(bytecode) {
-	return bytecode
-		.map((instruction, index) => `${index}: ${instruction}`)
-		.join("\n");
+    let stackDisplay = "";
+    for (let i = 0; i < bytecode.length; i++) {
+        stackDisplay += `${i}: ${bytecode[i]}\n`;
+        if (bytecode[i] === "PUSH") {
+            i++;
+            stackDisplay += `${i}: ${bytecode[i]}\n`;
+        }
+    }
+    return stackDisplay;
 }
 
 app.listen(port, () => {
