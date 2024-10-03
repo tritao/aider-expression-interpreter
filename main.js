@@ -1,5 +1,5 @@
-import { createRequire } from "node:module";
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import { ASTToBytecode } from "./ast-to-bytecode.js";
 const require = createRequire(import.meta.url);
 const { Module } = require("./bytecode_runner.js");
@@ -25,7 +25,6 @@ function main() {
 		);
 		console.log("  --help                        Show this help message.");
 	} else if (args.length === 2 && args[0] === "--run-bytecode") {
-
 		try {
 			const bytecode = fs.readFileSync(bytecodeFilePath);
 			const wasmModule = Module();
