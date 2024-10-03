@@ -118,13 +118,13 @@ function updateDebuggerUI(debuggerInstance) {
 	document.getElementById("debuggerStack").innerHTML =
 		`<span>Stack:</span> <ul class="inline">${stackList}</ul>`;
 	for (const el of document.querySelectorAll('[id^="bytecode-"]')) {
-		el.classList.remove("bg-yellow-200");
+		el.classList.remove("highlighted");
 	}
 	const currentLine = document.getElementById(
 		`bytecode-${debuggerInstance.pc}`,
 	);
 	if (currentLine) {
-		currentLine.classList.add("bg-yellow-200");
+		currentLine.classList.add("highlighted");
 	}
 	document.getElementById("debuggerPC").innerText =
 		`Program Counter: ${debuggerInstance.pc}`;
