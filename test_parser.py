@@ -1,6 +1,6 @@
 import unittest
-from lexer import Lexer
-from parser import Parser, NumberNode, BinaryOpNode, Token
+from lexer import Lexer, Token, TokenType
+from parser import Parser, NumberNode, BinaryOpNode
 
 class TestParser(unittest.TestCase):
     def test_single_number(self):
@@ -18,7 +18,7 @@ class TestParser(unittest.TestCase):
         ast = parser.parse()
         expected_ast = BinaryOpNode(
             left=NumberNode(3),
-            op=Token('PLUS', '+'),
+            op=Token(TokenType.PLUS, '+'),
             right=NumberNode(5)
         )
         self.assertEqual(ast.left.value, expected_ast.left.value)
@@ -32,10 +32,10 @@ class TestParser(unittest.TestCase):
         ast = parser.parse()
         expected_ast = BinaryOpNode(
             left=NumberNode(7),
-            op=Token('MINUS', '-'),
+            op=Token(TokenType.MINUS, '-'),
             right=BinaryOpNode(
                 left=NumberNode(2),
-                op=Token('MUL', '*'),
+                op=Token(TokenType.TIMES, '*'),
                 right=NumberNode(3)
             )
         )
@@ -56,7 +56,7 @@ class TestParser(unittest.TestCase):
                 op=Token('PLUS', '+'),
                 right=NumberNode(2)
             ),
-            op=Token('MUL', '*'),
+            op=Token(TokenType.TIMES, '*'),
             right=NumberNode(4)
         )
         self.assertEqual(ast.left.left.value, expected_ast.left.left.value)
@@ -72,7 +72,7 @@ class TestParser(unittest.TestCase):
         ast = parser.parse()
         expected_ast = BinaryOpNode(
             left=NumberNode(8),
-            op=Token('DIV', '/'),
+            op=Token(TokenType.DIVIDE, '/'),
             right=NumberNode(2)
         )
         self.assertEqual(ast.left.value, expected_ast.left.value)
@@ -86,10 +86,10 @@ class TestParser(unittest.TestCase):
         ast = parser.parse()
         expected_ast = BinaryOpNode(
             left=NumberNode(3),
-            op=Token('PLUS', '+'),
+            op=Token(TokenType.PLUS, '+'),
             right=BinaryOpNode(
                 left=NumberNode(2),
-                op=Token('MUL', '*'),
+                op=Token(TokenType.TIMES, '*'),
                 right=NumberNode(5)
             )
         )
