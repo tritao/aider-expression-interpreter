@@ -15,7 +15,7 @@ const testFiles = [
 	"test-files/test10.txt",
 ];
 
-testFiles.forEach((testFile) => {
+for (const testFile of testFiles) {
 	const expectedOutputFile = testFile.replace(".txt", ".out");
 	const input = fs.readFileSync(testFile, "utf-8").trim();
 	const expectedOutput = fs.readFileSync(expectedOutputFile, "utf-8").trim();
@@ -35,4 +35,4 @@ testFiles.forEach((testFile) => {
 			`${testFile}: FAIL (Expected: ${expectedOutput}, Got: ${result})`,
 		);
 	}
-});
+}
