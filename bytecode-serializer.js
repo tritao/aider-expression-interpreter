@@ -18,9 +18,7 @@ class BytecodeSerializer {
 		for (const { type, args } of instructions) {
 			const bytecodeValue = this.bytecodeMap[type];
 			if (bytecodeValue === undefined) {
-				throw new Error(
-					`No bytecode mapping for instruction type '${type}'`,
-				);
+				throw new Error(`No bytecode mapping for instruction type '${type}'`);
 			}
 			buffer.push(bytecodeValue);
 			if (type === Bytecode.PUSH) {
