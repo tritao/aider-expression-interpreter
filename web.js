@@ -113,7 +113,7 @@ function updateDebuggerUI(debuggerInstance) {
 		.map((value) => `<li>${value}</li>`)
 		.join("");
 	document.getElementById("debuggerStack").innerHTML =
-		`Stack: <ul>${stackList}</ul>`;
+		`<span>Stack:</span> <ul class="inline">${stackList}</ul>`;
 	for (const el of document.querySelectorAll('[id^="bytecode-"]')) {
 		el.classList.remove("bg-yellow-200");
 	}
