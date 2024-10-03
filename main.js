@@ -1,44 +1,71 @@
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
+import { BytecodeSerializer } from "./bytecode-serializer.js";
+import fs from "fs";
 
 function main() {
-	const readline = require("node:readline");
-	const rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	});
+	const args = process.argv.slice(2);
 
-	rl.setPrompt("calc> ");
-	rl.prompt();
+	if (args.length === 2 && args[0] === "--emit-bytecode") {
+		const inputFilePath = args[1];
+		const outputFilePath = inputFilePath.replace(".txt", ".bin");
 
-	rl.on("line", (line) => {
 		try {
-			const text = line.trim();
-			if (text.toLowerCase() === "exit" || text.toLowerCase() === "quit") {
-				rl.close();
-				return;
-			}
-
+			const text = fs.readFileSync(inputFilePath, "utf-8").trim();
 			const lexer = new Lexer(text);
 			const tokens = lexer.tokenize();
 
 			const parser = new Parser(tokens);
 			const ast = parser.parse();
 
-			console.log("AST:", ast.toString());
+			const instructions = ast.toInstructions();
+			const serializer = new BytecodeSerializer();
+			const bytecode = serializer.serialize(instructions);
 
-			const result = ast.evaluate();
-			console.log("Result:", result);
+			fs.writeFileSync(outputFilePath, bytecode);
+			console.log(`Bytecode written to ${outputFilePath}`);
 		} catch (e) {
 			console.error(`Error: ${e.message}`);
 		}
-		rl.prompt();
-	});
+	} else {
+		const readline = require("node:readline");
+		const rl = readline.createInterface({
+			input: process.stdin,
+			output: process.stdout,
+		});
 
-	rl.on("close", () => {
-		console.log("Exiting calculator.");
-		process.exit(0);
-	});
+		rl.setPrompt("calc> ");
+		rl.prompt();
+
+		rl.on("line", (line) => {
+			try {
+				const text = line.trim();
+				if (text.toLowerCase() === "exit" || text.toLowerCase() === "quit") {
+					rl.close();
+					return;
+				}
+
+				const lexer = new Lexer(text);
+				const tokens = lexer.tokenize();
+
+				const parser = new Parser(tokens);
+				const ast = parser.parse();
+
+				console.log("AST:", ast.toString());
+
+				const result = ast.evaluate();
+				console.log("Result:", result);
+			} catch (e) {
+				console.error(`Error: ${e.message}`);
+			}
+			rl.prompt();
+		});
+
+		rl.on("close", () => {
+			console.log("Exiting calculator.");
+			process.exit(0);
+		});
+	}
 }
 
 main();
