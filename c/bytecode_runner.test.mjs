@@ -12,9 +12,6 @@ Module().then(instance => {
         console.log('Intermediate stack:', stack);
     } while (result > 0);
 
-    const finalStack = interpreter.getStack();
-    console.log('Final stack:', finalStack);
-
     const stack = interpreter.getStack();
     console.log('Final stack:', stack);
 });
