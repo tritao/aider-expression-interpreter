@@ -110,7 +110,7 @@ class Lexer:
         """Tokenize the entire input text and return a list of tokens."""
         tokens = []
         token = self.get_next_token()
-        while token.type != EOF:
+        while token.type != TokenType.EOF:
             tokens.append(token)
             token = self.get_next_token()
         tokens.append(token)  # Append the EOF token
