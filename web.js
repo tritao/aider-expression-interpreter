@@ -81,10 +81,10 @@ function renderBytecodeStack(bytecode) {
 	let stackDisplay = "";
 	for (let i = 0; i < bytecode.length; i++) {
 		if (bytecode[i] === "PUSH") {
-			stackDisplay += `<div id="bytecode-${i}">${i}: ${bytecode[i]} ${bytecode[i + 1]}</div>`;
+			stackDisplay += `<div id="bytecode-${i}">${i}: ${bytecode[i]} ${bytecode[i + 1]}</div>\n`;
 			i++; // Skip the operand as it's already included
 		} else {
-			stackDisplay += `<div id="bytecode-${i}">${i}: ${bytecode[i]}</div>`;
+			stackDisplay += `<div id="bytecode-${i}">${i}: ${bytecode[i]}</div>\n`;
 		}
 	}
 	return stackDisplay;
