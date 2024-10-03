@@ -1,6 +1,6 @@
 import fs from "node:fs";
-import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { ASTToBytecode } from "./ast-to-bytecode.js";
+import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
 
