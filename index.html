@@ -8,25 +8,25 @@
     <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-    <h1 class="text-blue-500">Expression Evaluator</h1>
-    <form id="expressionForm">
-        <input id="expressionInput" type="text" name="expression" placeholder="Enter expression" required>
-        <button type="submit">Evaluate</button>
+    <h1 class="text-3xl font-bold text-center my-4">Expression Evaluator</h1>
+    <form id="expressionForm" class="flex flex-col items-center space-y-4">
+        <input id="expressionInput" type="text" name="expression" placeholder="Enter expression" required class="input input-bordered w-full max-w-xs" />
+        <button type="submit" class="btn btn-primary">Evaluate</button>
     </form>
-    <div>
-        <button onclick="setExpression('3 + 5')">3 + 5</button>
-        <button onclick="setExpression('7 - 2 * 3')">7 - 2 * 3</button>
-        <button onclick="setExpression('(1 + 2) * 4')">(1 + 2) * 4</button>
-        <button onclick="setExpression('8 / 2')">8 / 2</button>
-        <button onclick="setExpression('3.14 + 2.71')">3.14 + 2.71</button>
+    <div class="flex justify-center space-x-2 my-4">
+        <button class="btn btn-secondary" onclick="setExpression('3 + 5')">3 + 5</button>
+        <button class="btn btn-secondary" onclick="setExpression('7 - 2 * 3')">7 - 2 * 3</button>
+        <button class="btn btn-secondary" onclick="setExpression('(1 + 2) * 4')">(1 + 2) * 4</button>
+        <button class="btn btn-secondary" onclick="setExpression('8 / 2')">8 / 2</button>
+        <button class="btn btn-secondary" onclick="setExpression('3.14 + 2.71')">3.14 + 2.71</button>
     </div>
-    <div id="result"></div>
-    <div id="debugger">
-        <h2>Debugger</h2>
-        <div id="debuggerStack">Stack: </div>
-        <div id="debuggerPC">Program Counter: </div>
-        <button id="stepButton">Step</button>
-        <button id="resetButton">Reset</button>
+    <div id="result" class="my-4 p-4 border rounded-lg shadow-md bg-white"></div>
+    <div id="debugger" class="my-4 p-4 border rounded-lg shadow-md bg-white">
+        <h2 class="text-xl font-semibold">Debugger</h2>
+        <div id="debuggerStack" class="mt-2">Stack: </div>
+        <div id="debuggerPC" class="mt-2">Program Counter: </div>
+        <button id="stepButton" class="btn btn-accent mt-2">Step</button>
+        <button id="resetButton" class="btn btn-accent mt-2">Reset</button>
     </div>
 </body>
 </html>
