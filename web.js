@@ -26,7 +26,7 @@ function generateHTML(content = "", expression = "") {
           <button onclick="setExpression('3.14 + 2.71')">3.14 + 2.71</button>
         </div>
         ${content}
-        <script src="/dist/client.js"></script>
+        <script type="module" src="/src/client.js"></script>
       </body>
     </html>
   `;
