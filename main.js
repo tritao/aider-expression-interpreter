@@ -1,7 +1,7 @@
+import fs from "fs";
+import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
-import { BytecodeSerializer } from "./bytecode-serializer.js";
-import fs from "fs";
 
 function main() {
 	const args = process.argv.slice(2);
