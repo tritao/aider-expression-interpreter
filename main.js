@@ -51,7 +51,19 @@ function main() {
 		} catch (e) {
 			console.error(`Error: ${e.message}`);
 		}
-	} else {
+	} else if (args.length === 2 && args[0] === "--disassemble") {
+		const bytecodeFilePath = args[1];
+
+		try {
+			const bytecode = fs.readFileSync(bytecodeFilePath);
+			const disassembler = new BytecodeDisassembler();
+			const disassembledCode = disassembler.disassemble(bytecode);
+
+			console.log("Disassembled Bytecode:");
+			console.log(disassembledCode);
+		} catch (e) {
+			console.error(`Error: ${e.message}`);
+		}
 		const readline = require("node:readline");
 		const rl = readline.createInterface({
 			input: process.stdin,
