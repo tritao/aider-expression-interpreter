@@ -12,6 +12,7 @@ Module().then(instance => {
     let result;
     do {
         result = interpreter.step();
+        console.log(result)
     } while (result > 0);
 
     const memory = new WebAssembly.Memory({ initial: 1 });
