@@ -84,6 +84,10 @@ function renderBytecodeStack(bytecode) {
 }
 
 function initializeDebugger(bytecode) {
+	if (!bytecode || bytecode.length === 0) {
+		alert("No bytecode to debug.");
+		return;
+	}
 	const debuggerInstance = new BytecodeDebugger(bytecode);
 	updateDebuggerUI(debuggerInstance);
 
