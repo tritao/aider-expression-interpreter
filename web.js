@@ -98,7 +98,8 @@ function initializeDebugger(bytecode) {
 	const debuggerInstance = new BytecodeDebugger(bytecode);
 	updateDebuggerUI(debuggerInstance);
 
-	document.getElementById("stepButton").onclick = () => {
+	const stepButton = document.getElementById("stepButton");
+	stepButton.onclick = () => {
 		try {
 			debuggerInstance.step();
 			updateDebuggerUI(debuggerInstance);
@@ -106,6 +107,9 @@ function initializeDebugger(bytecode) {
 			alert(e.message);
 		}
 	};
+
+	// Disable the step button if there are no more bytecodes to step through
+	stepButton.disabled = debuggerInstance.pc >= debuggerInstance.bytecode.length;
 }
 
 function updateDebuggerUI(debuggerInstance) {
