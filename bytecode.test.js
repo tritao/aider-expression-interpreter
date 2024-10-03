@@ -1,5 +1,6 @@
 import { describe, expect, it } from "bun:test";
-import { Bytecode, BytecodeInterpreter } from "./bytecode.js";
+import { Bytecode } from "./bytecode.js";
+import { BytecodeInterpreter } from "./bytecode-interpreter.js";
 
 describe("BytecodeInterpreter", () => {
 	it("should execute simple addition", () => {
