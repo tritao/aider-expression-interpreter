@@ -1,0 +1,22 @@
+{
+  "name": "calculator-parser",
+  "version": "1.0.0",
+  "description": "A simple calculator parser implemented in JavaScript.",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha test_lexer.js test_parser.js"
+  },
+  "keywords": [
+    "calculator",
+    "parser",
+    "lexer",
+    "AST"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
