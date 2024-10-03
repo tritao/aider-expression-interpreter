@@ -26,7 +26,11 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    fread(bytecode, 1, length, file);
+    if (fread(bytecode, 1, length, file) != length) {
+        perror("Failed to read bytecode");
+        free(bytecode);
+        return 1;
+    }
     fclose(file);
 
     int result = execute_bytecode(bytecode, length);
