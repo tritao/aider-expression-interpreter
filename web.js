@@ -31,6 +31,7 @@ app.post("/", (req, res) => {
 		const ast = parser.parse();
 
 		const result = ast.evaluate();
+		const astTree = renderAST(ast);
 		res.send(`
       <html>
         <body>
@@ -40,7 +41,8 @@ app.post("/", (req, res) => {
             <button type="submit">Evaluate</button>
           </form>
           <h2>Result: ${result}</h2>
-          <h2>AST: ${ast.toString()}</h2>
+          <h2>AST:</h2>
+          <pre>${astTree}</pre>
         </body>
       </html>
     `);
@@ -59,6 +61,21 @@ app.post("/", (req, res) => {
     `);
 	}
 });
+
+function renderAST(node, depth = 0) {
+  let result = "";
+  const indent = "  ".repeat(depth);
+  if (node instanceof NumberNode) {
+    result += `${indent}NumberNode(${node.value})\n`;
+  } else if (node instanceof BinaryOpNode) {
+    result += `${indent}BinaryOpNode(\n`;
+    result += renderAST(node.left, depth + 1);
+    result += `${indent}  ${node.op.type}\n`;
+    result += renderAST(node.right, depth + 1);
+    result += `${indent})\n`;
+  }
+  return result;
+}
 
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`);
