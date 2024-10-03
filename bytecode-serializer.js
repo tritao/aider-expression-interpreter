@@ -13,6 +13,7 @@ class BytecodeSerializer {
 	}
 
 	serialize(instructions) {
+		console.debug("Serializing instructions:", instructions);
 		const buffer = [];
 		for (const instruction of instructions) {
 			if (instruction.type === Bytecode.PUSH) {
@@ -22,6 +23,7 @@ class BytecodeSerializer {
 				buffer.push(this.bytecodeMap[instruction.type]);
 			}
 		}
+		console.debug("Serialized buffer:", buffer);
 		return new Uint8Array(buffer);
 	}
 }
