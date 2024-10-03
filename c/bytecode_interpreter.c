@@ -4,6 +4,12 @@
 
 void init_interpreter(BytecodeInterpreter *interpreter, const unsigned char *bytecode, size_t length) {
     printf("Initializing interpreter with bytecode size: %zu\n", length);
+    printf("Bytecode data: ");
+    for (size_t i = 0; i < length; i++) {
+        printf("%02x ", bytecode[i]);
+    }
+    printf("\n");
+
     interpreter->bytecode = bytecode;
     interpreter->length = length;
     interpreter->sp = -1;
