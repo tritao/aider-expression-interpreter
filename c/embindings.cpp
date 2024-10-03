@@ -13,7 +13,11 @@ EMSCRIPTEN_BINDINGS(bytecode_interpreter) {
             init_interpreter(&self, bytecodeVec.data(), bytecodeVec.size());
         }))
         .function("step", &step, allow_raw_pointers())
-        .function("getStack", &get_stack, allow_raw_pointers());
+        .function("getStack", optional_override([](BytecodeInterpreter& self) {
+            int stackSize;
+            const int* stack = get_stack(&self, &stackSize);
+            return val::array(stack, stack + stackSize);
+        }));
 
     register_vector<int>("IntVector");
 }
