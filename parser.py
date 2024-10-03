@@ -1,3 +1,5 @@
+from lexer import TokenType
+
 class NumberNode:
     def __init__(self, value):
         self.value = value
@@ -30,35 +32,35 @@ class Parser:
 
     def expr(self):
         node = self.term()
-        while self.current_token.type in ('PLUS', 'MINUS'):
+        while self.current_token.type in (TokenType.PLUS, TokenType.MINUS):
             token = self.current_token
-            if token.type == 'PLUS':
-                self.eat('PLUS')
-            elif token.type == 'MINUS':
-                self.eat('MINUS')
+            if token.type == TokenType.PLUS:
+                self.eat(TokenType.PLUS)
+            elif token.type == TokenType.MINUS:
+                self.eat(TokenType.MINUS)
             node = BinaryOpNode(left=node, op=token, right=self.term())
         return node
 
     def term(self):
         node = self.factor()
-        while self.current_token.type in ('MUL', 'DIV'):
+        while self.current_token.type in (TokenType.TIMES, TokenType.DIVIDE):
             token = self.current_token
-            if token.type == 'MUL':
-                self.eat('MUL')
-            elif token.type == 'DIV':
-                self.eat('DIV')
+            if token.type == TokenType.TIMES:
+                self.eat(TokenType.TIMES)
+            elif token.type == TokenType.DIVIDE:
+                self.eat(TokenType.DIVIDE)
             node = BinaryOpNode(left=node, op=token, right=self.factor())
         return node
 
     def factor(self):
         token = self.current_token
-        if token.type == 'NUMBER':
-            self.eat('NUMBER')
+        if token.type == TokenType.NUMBER:
+            self.eat(TokenType.NUMBER)
             return NumberNode(value=token.value)
-        elif token.type == 'LPAREN':
-            self.eat('LPAREN')
+        elif token.type == TokenType.LPAREN:
+            self.eat(TokenType.LPAREN)
             node = self.expr()
-            self.eat('RPAREN')
+            self.eat(TokenType.RPAREN)
             return node
         else:
             self.error()
