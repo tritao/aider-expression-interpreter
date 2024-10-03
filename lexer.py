@@ -10,7 +10,10 @@ LPAREN = 'LPAREN'
 RPAREN = 'RPAREN'
 EOF = 'EOF'
 
-class Token:
+class LexerError(Exception):
+    """Exception raised for errors in the lexer."""
+    def __init__(self, message):
+        super().__init__(message)
     def __init__(self, type_, value):
         self.type = type_
         self.value = value
@@ -30,7 +33,7 @@ class Lexer:
         self.current_char = self.text[self.pos] if self.text else None
 
     def error(self):
-        raise Exception('Invalid character')
+        raise LexerError('Invalid character')
 
     def advance(self):
         """Advance the 'pos' pointer and set 'current_char'."""
