@@ -37,8 +37,7 @@ function evaluateExpression(expression) {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-		const interpreter = new BytecodeInterpreter();
-		const result = interpreter.execute(bytecode);
+		const result = executeBytecode(bytecode);
 
 		const astTree = renderAST(ast);
 		const bytecodeStack = renderBytecodeStack(bytecode);
@@ -63,7 +62,10 @@ document.getElementById("resetButton").onclick = () => {
 	}
 };
 
-function renderAST(node, depth = 0) {
+function executeBytecode(bytecode) {
+	const interpreter = new BytecodeInterpreter();
+	return interpreter.execute(bytecode);
+}
 	let result = "";
 	const indent = "  ".repeat(depth);
 	if (node instanceof NumberNode) {
