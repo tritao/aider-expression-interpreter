@@ -1,5 +1,8 @@
 import fs from "node:fs";
 import { ASTToBytecode } from "./ast-to-bytecode.js";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const { Module } = require("./bytecode_runner.js");
 import { BytecodeDisassembler } from "./bytecode-disassembler.js";
 import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { Lexer } from "./lexer.js";
@@ -21,7 +24,19 @@ function main() {
 			"  --disassemble <bytecode-file> Disassemble bytecode from the specified binary file.",
 		);
 		console.log("  --help                        Show this help message.");
-	} else if (args.length === 2 && args[0] === "--disassemble") {
+	} else if (args.length === 2 && args[0] === "--run-bytecode") {
+		const bytecodeFilePath = args[1];
+
+		try {
+			const bytecode = fs.readFileSync(bytecodeFilePath);
+			const wasmModule = Module();
+			wasmModule.onRuntimeInitialized = () => {
+				const result = wasmModule.run(bytecode);
+				console.log("Execution Result:", result);
+			};
+		} catch (e) {
+			console.error(`Error: ${e.message}`);
+		}
 		const bytecodeFilePath = args[1];
 
 		try {
