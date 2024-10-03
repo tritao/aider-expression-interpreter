@@ -1,12 +1,16 @@
 CC = emcc
 CFLAGS = -Wall -Wextra -O2 -g
-TARGET = bytecode_runner.mjs
+NODE_TARGET = bytecode_runner.node.mjs
+BROWSER_TARGET = bytecode_runner.browser.js
 SRCS = main.c bytecode_interpreter.c embindings.cpp
 
-all: $(TARGET)
+all: $(NODE_TARGET) $(BROWSER_TARGET)
 
-$(TARGET):
+$(NODE_TARGET):
 	$(CC) $(CFLAGS) --bind -s ENVIRONMENT=node -s MODULARIZE=1 -s EXPORT_ES6=1 $(SRCS) -o $@
+
+$(BROWSER_TARGET):
+	$(CC) $(CFLAGS) --bind -s ENVIRONMENT=web -s MODULARIZE=1 -s EXPORT_ES6=1 $(SRCS) -o $@
 
 clean:
 	rm -f $(OBJS) $(TARGET)
