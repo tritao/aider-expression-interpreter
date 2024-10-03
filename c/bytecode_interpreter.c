@@ -7,7 +7,6 @@ int execute_bytecode(const unsigned char *bytecode, size_t length) {
     int sp = -1; // Stack pointer
 
     for (size_t i = 0; i < length; ++i) {
-        printf("Processing bytecode: %x\n", bytecode[i]);
         switch (bytecode[i]) {
             case BYTECODE_PUSH: // PUSH
                 stack[++sp] = bytecode[++i];
