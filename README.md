@@ -1,30 +1,5 @@
 # calculator-parser
 
-To install dependencies:
-
-```bash
-bun install
-```
-
-To run with Bun:
-
-```bash
-bun run main.js
-```
-
-To run with Vite:
-
-```bash
-bun run dev
-```
-
-```bash
-bun run main.js
-```
-
-This project was created using `bun init` in bun v1.1.27. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
-# Project Name
-
 This project is a demonstration of using AI-assisted coding to rapidly develop and test new approaches in software development. The project was created in a couple of hours using Aider, an AI tool designed to assist developers in writing and refactoring code efficiently.
 
 ## Overview
@@ -40,33 +15,37 @@ The project includes several components that work together to interpret and exec
 
 ## Getting Started
 
-To get started with this project, clone the repository and install the necessary dependencies:
+To install dependencies:
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
-npm install
+bun install
 ```
 
 ## Usage
 
-Run the project using the following command:
+To run the non-browser CLI tool:
 
 ```bash
-npm start
+bun run main.js
 ```
 
-## Contributing
+To run the browser part with Vite:
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue if you have any suggestions or improvements.
+```bash
+bun run dev
+```
 
-## License
-
-This project is licensed under the MIT License.
+```bash
+bun run main.js
+```
 
 ## Screenshot
 
 ![Screenshot of the application](screenshot.png)
+
+## License
+
+This project is licensed under the MIT License.
 
 ## Acknowledgments
 
