@@ -66,6 +66,7 @@ function executeBytecode(bytecode) {
 	const interpreter = new BytecodeInterpreter();
 	return interpreter.execute(bytecode);
 }
+function renderAST(node, depth = 0) {
 	let result = "";
 	const indent = "  ".repeat(depth);
 	if (node instanceof NumberNode) {
