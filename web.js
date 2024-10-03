@@ -1,5 +1,6 @@
 import express from "express";
 import { ASTToBytecode } from "./ast-to-bytecode.js";
+import { BytecodeInterpreter } from "./bytecode-interpreter.js";
 import { Lexer } from "./lexer.js";
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
 
@@ -52,7 +53,8 @@ app.post("/", (req, res) => {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-		const result = ast.evaluate();
+		const interpreter = new BytecodeInterpreter();
+		const result = interpreter.execute(bytecode);
 		const astTree = renderAST(ast);
 		const bytecodeStack = renderBytecodeStack(bytecode);
 		res.send(
