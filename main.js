@@ -9,8 +9,8 @@ function main() {
 
 	if (args.includes("--help")) {
 		console.log("Usage:");
-		console.log("  node main.js --emit-bytecode <input-file>");
-		console.log("  node main.js");
+		console.log("  main.js --emit-bytecode <input-file>");
+		console.log("  main.js");
 		console.log("Options:");
 		console.log(
 			"  --emit-bytecode <input-file>  Emit bytecode binary from the specified test file.",
