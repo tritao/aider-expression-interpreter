@@ -11,8 +11,10 @@ document
 		const expression = document.getElementById("expressionInput").value;
 		const interpreterType = document.getElementById("interpreterSelect").value;
 		try {
-			const { result, astTree, bytecodeStack, bytecode } =
-				evaluateExpression(expression, interpreterType);
+			const { result, astTree, bytecodeStack, bytecode } = evaluateExpression(
+				expression,
+				interpreterType,
+			);
 			document.getElementById("resultValue").innerText = result;
 			document.getElementById("bytecodeStack").innerHTML = bytecodeStack;
 			document.getElementById("astTree").innerText = astTree;
@@ -69,7 +71,9 @@ async function executeBytecode(bytecode, interpreterType = "js") {
 		const interpreter = new BytecodeInterpreter();
 		result = interpreter.execute(bytecode);
 	} else if (interpreterType === "wasm") {
-		const BytecodeWasmInterpreter = (await import("./bytecode-wasm-interpreter.js")).BytecodeWasmInterpreter;
+		const BytecodeWasmInterpreter = (
+			await import("./bytecode-wasm-interpreter.js")
+		).BytecodeWasmInterpreter;
 		const interpreter = new BytecodeWasmInterpreter();
 		await interpreter.init(bytecode);
 		result = interpreter.execute();
