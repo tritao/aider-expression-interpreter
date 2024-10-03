@@ -3,7 +3,7 @@
 #include "bytecode_values.h"
 
 void init_interpreter(BytecodeInterpreter *interpreter, const unsigned char *bytecode, size_t length) {
-#ifdef DEBUG
+#ifdef ENABLE_DEBUG_PRINTS
     printf("Initializing interpreter with bytecode size: %zu\n", length);
     printf("Bytecode data: ");
     for (size_t i = 0; i < length; i++) {
@@ -23,7 +23,7 @@ int step(BytecodeInterpreter *interpreter) {
         return -1; // No more instructions
     }
 
-#ifdef DEBUG
+#ifdef ENABLE_DEBUG_PRINTS
     printf("Executing bytecode at ip: %zu, instruction: %02x\n", interpreter->ip, interpreter->bytecode[interpreter->ip]);
 #endif
     switch (interpreter->bytecode[interpreter->ip]) {
