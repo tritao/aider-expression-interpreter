@@ -13,6 +13,6 @@ $(BROWSER_TARGET):
 	$(CC) $(CFLAGS) --bind -s ENVIRONMENT=web -s MODULARIZE=1 -s EXPORT_ES6=1 $(SRCS) -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(NODE_TARGET) $(BROWSER_TARGET)
 
 .PHONY: all clean
