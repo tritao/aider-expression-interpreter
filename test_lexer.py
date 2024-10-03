@@ -14,7 +14,7 @@ class TestLexer(unittest.TestCase):
         expected_tokens = [
             Token('NUMBER', 3),
             Token('PLUS', '+'),
-            Token('NUMBER', 5)
+            Token('NUMBER', 5),
         Token('EOF', None)
         ]
         self.assertEqual(tokens, expected_tokens)
