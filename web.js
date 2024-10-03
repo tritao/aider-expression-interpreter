@@ -50,6 +50,7 @@ function evaluateExpression(expression) {
 			result,
 			astTree,
 			bytecodeStack,
+			bytecode,
 		};
 	} catch (e) {
 		throw new Error(`Error: ${e.message}`);
