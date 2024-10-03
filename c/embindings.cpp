@@ -22,5 +22,4 @@ EMSCRIPTEN_BINDINGS(bytecode_interpreter) {
             return self.ip;
         }));
 
-    register_vector<int>("IntVector");
 }
