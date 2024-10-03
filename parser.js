@@ -1,4 +1,4 @@
-const { TokenType } = require('./lexer');
+import { TokenType } from './lexer.js';
 
 class NumberNode {
     constructor(value) {
@@ -111,4 +111,4 @@ class Parser {
     }
 }
 
-module.exports = { Parser, NumberNode, BinaryOpNode };
+export { Parser, NumberNode, BinaryOpNode };

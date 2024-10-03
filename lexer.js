@@ -124,4 +124,4 @@ class Lexer {
     }
 }
 
-module.exports = { Lexer, Token, TokenType, LexerError };
+export { Lexer, Token, TokenType, LexerError };

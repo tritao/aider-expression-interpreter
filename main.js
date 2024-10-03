@@ -1,5 +1,5 @@
-const { Lexer } = require('./lexer');
-const { Parser } = require('./parser');
+import { Lexer } from './lexer.js';
+import { Parser } from './parser.js';
 
 function main() {
     const readline = require('readline');

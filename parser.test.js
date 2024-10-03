@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'bun:test';
-import { Lexer, Token, TokenType } from './lexer';
-import { Parser, NumberNode, BinaryOpNode } from './parser';
+import { Lexer, Token, TokenType } from './lexer.js';
+import { Parser, NumberNode, BinaryOpNode } from './parser.js';
 
 describe('Parser', () => {
     it('should parse a single number', () => {

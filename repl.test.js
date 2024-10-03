@@ -3,7 +3,7 @@ import { spawn } from 'child_process';
 
 describe('REPL', () => {
     it('should evaluate simple expressions', (done) => {
-        const repl = spawn('bun', ['main.js']);
+        const repl = spawn('bun', ['main.js'], { stdio: 'pipe' });
 
         repl.stdout.on('data', (data) => {
             const output = data.toString();

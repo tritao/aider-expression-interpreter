@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { Lexer, Token, TokenType } from './lexer';
+import { Lexer, Token, TokenType } from './lexer.js';
 
 describe('Lexer', () => {
     it('should tokenize a single number', () => {
