@@ -15,17 +15,16 @@ class BytecodeSerializer {
 	serialize(instructions) {
 		console.debug("Serializing instructions:", instructions);
 		const buffer = [];
-		for (const instruction of instructions) {
-			const bytecodeValue = this.bytecodeMap[instruction.type];
+		for (const { type, args } of instructions) {
+			const bytecodeValue = this.bytecodeMap[type];
 			if (bytecodeValue === undefined) {
 				throw new Error(
-					`No bytecode mapping for instruction type '${instruction.type}'`,
+					`No bytecode mapping for instruction type '${type}'`,
 				);
-			} else {
-				buffer.push(bytecodeValue);
-				if (instruction.type === Bytecode.PUSH) {
-					buffer.push(instruction.value);
-				}
+			}
+			buffer.push(bytecodeValue);
+			if (type === Bytecode.PUSH && args.length > 0) {
+				buffer.push(args[0]);
 			}
 		}
 		console.debug("Serialized buffer:", buffer);
