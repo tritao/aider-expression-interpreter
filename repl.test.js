@@ -18,9 +18,9 @@ describe('REPL', () => {
     });
 
     it('should handle invalid input gracefully', (done) => {
-        const repl = spawn('node', ['main.js']);
+        const repl = spawn('bun', ['main.js']);
 
-        repl.stdout.on('data', (data) => {
+        repl.stderr.on('data', (data) => {
             const output = data.toString();
             if (output.includes('Error:')) {
                 expect(output).toContain('Error: Invalid character');
