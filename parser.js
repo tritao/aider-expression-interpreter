@@ -113,6 +113,4 @@ class Parser {
 	}
 }
 
-import { ASTToBytecode } from "./ast-to-bytecode.js";
-
 export { Parser, NumberNode, BinaryOpNode };
