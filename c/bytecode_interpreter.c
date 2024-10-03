@@ -3,12 +3,14 @@
 #include "bytecode_values.h"
 
 void init_interpreter(BytecodeInterpreter *interpreter, const unsigned char *bytecode, size_t length) {
+#ifdef DEBUG
     printf("Initializing interpreter with bytecode size: %zu\n", length);
     printf("Bytecode data: ");
     for (size_t i = 0; i < length; i++) {
         printf("%02x ", bytecode[i]);
     }
     printf("\n");
+#endif
 
     interpreter->bytecode = bytecode;
     interpreter->length = length;
@@ -21,7 +23,9 @@ int step(BytecodeInterpreter *interpreter) {
         return -1; // No more instructions
     }
 
+#ifdef DEBUG
     printf("Executing bytecode at ip: %zu, instruction: %02x\n", interpreter->ip, interpreter->bytecode[interpreter->ip]);
+#endif
     switch (interpreter->bytecode[interpreter->ip]) {
         case BYTECODE_PUSH: // PUSH
             interpreter->stack[++interpreter->sp] = interpreter->bytecode[++interpreter->ip];
