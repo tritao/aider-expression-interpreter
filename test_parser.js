@@ -1,6 +1,6 @@
-const { expect } = require('chai');
-const { Lexer, Token, TokenType } = require('./lexer');
-const { Parser, NumberNode, BinaryOpNode } = require('./parser');
+import { describe, it, expect } from 'bun:test';
+import { Lexer, Token, TokenType } from './lexer';
+import { Parser, NumberNode, BinaryOpNode } from './parser';
 
 describe('Parser', () => {
     it('should parse a single number', () => {
@@ -9,7 +9,7 @@ describe('Parser', () => {
         const parser = new Parser(tokens);
         const ast = parser.parse();
         const expectedAst = new NumberNode(42);
-        expect(ast.value).to.equal(expectedAst.value);
+        expect(ast.value).toBe(expectedAst.value);
     });
 
     it('should parse simple addition', () => {
@@ -22,9 +22,9 @@ describe('Parser', () => {
             new Token(TokenType.PLUS, '+'),
             new NumberNode(5)
         );
-        expect(ast.left.value).to.equal(expectedAst.left.value);
-        expect(ast.op.type).to.equal(expectedAst.op.type);
-        expect(ast.right.value).to.equal(expectedAst.right.value);
+        expect(ast.left.value).toBe(expectedAst.left.value);
+        expect(ast.op.type).toBe(expectedAst.op.type);
+        expect(ast.right.value).toBe(expectedAst.right.value);
     });
 
     it('should parse mixed operations', () => {

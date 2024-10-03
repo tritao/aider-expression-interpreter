@@ -1,12 +1,12 @@
-const { expect } = require('chai');
-const { Lexer, Token, TokenType } = require('./lexer');
+import { describe, it, expect } from 'bun:test';
+import { Lexer, Token, TokenType } from './lexer';
 
 describe('Lexer', () => {
     it('should tokenize a single number', () => {
         const lexer = new Lexer("42");
         const tokens = lexer.tokenize();
         const expectedTokens = [new Token(TokenType.NUMBER, 42), new Token(TokenType.EOF, null)];
-        expect(tokens).to.deep.equal(expectedTokens);
+        expect(tokens).toEqual(expectedTokens);
     });
 
     it('should tokenize simple addition', () => {
@@ -18,7 +18,7 @@ describe('Lexer', () => {
             new Token(TokenType.NUMBER, 5),
             new Token(TokenType.EOF, null)
         ];
-        expect(tokens).to.deep.equal(expectedTokens);
+        expect(tokens).toEqual(expectedTokens);
     });
 
     it('should tokenize mixed operations', () => {
@@ -65,7 +65,7 @@ describe('Lexer', () => {
 
     it('should throw error on invalid characters', () => {
         const lexer = new Lexer("5 & 3");
-        expect(() => lexer.tokenize()).to.throw();
+        expect(() => lexer.tokenize()).toThrow();
     });
 
     it('should tokenize floating point numbers', () => {
