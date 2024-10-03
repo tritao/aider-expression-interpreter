@@ -1,5 +1,6 @@
 import { ASTToBytecode } from "./ast-to-bytecode.js";
 import { BytecodeInterpreter } from "./bytecode-interpreter.js";
+import { BytecodeDebugger } from "./bytecode-debugger.js";
 import { Lexer } from "./lexer.js";
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
 
@@ -17,6 +18,7 @@ document
             <h2>AST:</h2>
             <pre>${astTree}</pre>
         `;
+			initializeDebugger(bytecode);
 		} catch (e) {
 			document.getElementById("result").innerHTML = `<h2>${e.message}</h2>`;
 		}
@@ -78,6 +80,25 @@ function renderBytecodeStack(bytecode) {
 		}
 	}
 	return stackDisplay;
+}
+
+function initializeDebugger(bytecode) {
+	const debuggerInstance = new BytecodeDebugger(bytecode);
+	updateDebuggerUI(debuggerInstance);
+
+	document.getElementById("stepButton").onclick = () => {
+		try {
+			debuggerInstance.step();
+			updateDebuggerUI(debuggerInstance);
+		} catch (e) {
+			alert(e.message);
+		}
+	};
+}
+
+function updateDebuggerUI(debuggerInstance) {
+	document.getElementById("debuggerStack").innerText = `Stack: ${debuggerInstance.stack.join(", ")}`;
+	document.getElementById("debuggerPC").innerText = `Program Counter: ${debuggerInstance.pc}`;
 }
 
 export { evaluateExpression };
