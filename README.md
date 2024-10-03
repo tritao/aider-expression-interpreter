@@ -6,7 +6,17 @@ To install dependencies:
 bun install
 ```
 
-To run:
+To run with Bun:
+
+```bash
+bun run main.js
+```
+
+To run with Vite:
+
+```bash
+bun run dev
+```
 
 ```bash
 bun run main.js
@@ -53,6 +63,10 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 ## License
 
 This project is licensed under the MIT License.
+
+## Screenshot
+
+![Screenshot of the application](screenshot.png)
 
 ## Acknowledgments
 
