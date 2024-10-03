@@ -53,7 +53,7 @@ class TestParser(unittest.TestCase):
         expected_ast = BinaryOpNode(
             left=BinaryOpNode(
                 left=NumberNode(1),
-                op=Token('PLUS', '+'),
+                op=Token(TokenType.PLUS, '+'),
                 right=NumberNode(2)
             ),
             op=Token(TokenType.TIMES, '*'),
