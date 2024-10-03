@@ -2,6 +2,7 @@ import { ASTToBytecode } from "./ast-to-bytecode.js";
 import { BytecodeDebugger } from "./bytecode-debugger.js";
 import { BytecodeInterpreter } from "./bytecode-interpreter.js";
 import { Lexer } from "./lexer.js";
+import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
 
 document
@@ -38,7 +39,10 @@ async function evaluateExpression(expression, interpreterType) {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-		const result = await executeBytecode(bytecode, interpreterType);
+		const serializer = new BytecodeSerializer();
+		const serializedBytecode = serializer.serialize(bytecode);
+
+		const result = await executeBytecode(serializedBytecode, interpreterType);
 
 		const astTree = renderAST(ast);
 		const bytecodeStack = renderBytecodeStack(bytecode);
