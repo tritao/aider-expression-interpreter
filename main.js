@@ -48,11 +48,15 @@ function main() {
 
 			const astToBytecode = new ASTToBytecode();
 			const instructions = astToBytecode.convert(ast);
-			const serializer = new BytecodeSerializer();
-			const bytecode = serializer.serialize(instructions);
+			if (instructions.length === 0) {
+				console.error("Error: No instructions generated. The input may be empty or invalid.");
+			} else {
+				const serializer = new BytecodeSerializer();
+				const bytecode = serializer.serialize(instructions);
 
-			fs.writeFileSync(outputFilePath, bytecode);
-			console.log(`Bytecode written to ${outputFilePath}`);
+				fs.writeFileSync(outputFilePath, bytecode);
+				console.log(`Bytecode written to ${outputFilePath}`);
+			}
 		} catch (e) {
 			console.error(`Error: ${e.message}`);
 		}
