@@ -21,6 +21,7 @@ int step(BytecodeInterpreter *interpreter) {
         return -1; // No more instructions
     }
 
+    printf("Executing bytecode at ip: %zu, instruction: %02x\n", interpreter->ip, interpreter->bytecode[interpreter->ip]);
     switch (interpreter->bytecode[interpreter->ip]) {
         case BYTECODE_PUSH: // PUSH
             interpreter->stack[++interpreter->sp] = interpreter->bytecode[++interpreter->ip];
