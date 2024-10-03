@@ -1,8 +1,9 @@
 import Module from "./c/bytecode_runner.mjs";
 
 class BytecodeWasmInterpreter {
+	static moduleInstance = null;
+
 	constructor() {
-		this.instance = null;
 		this.interpreter = null;
 	}
 
@@ -10,7 +11,10 @@ class BytecodeWasmInterpreter {
 		if (!bytecode) {
 			throw new Error("Bytecode must be provided for initialization");
 		}
-		this.instance = await Module();
+		if (!BytecodeWasmInterpreter.moduleInstance) {
+			BytecodeWasmInterpreter.moduleInstance = await Module();
+		}
+		this.instance = BytecodeWasmInterpreter.moduleInstance;
 		this.interpreter = new this.instance.BytecodeInterpreter();
 	}
 
