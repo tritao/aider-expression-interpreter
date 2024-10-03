@@ -3,7 +3,6 @@ import { BytecodeWasmInterpreter } from "./bytecode-wasm-interpreter.js";
 describe("BytecodeWasmInterpreter", () => {
 	let interpreter;
 
-
 	function parseBytecode(str) {
 		return new Uint8Array(str.split(",").map(Number));
 	}
