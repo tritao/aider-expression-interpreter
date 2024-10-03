@@ -48,4 +48,3 @@ const int* get_stack(const BytecodeInterpreter *interpreter, int *stack_size) {
     *stack_size = interpreter->sp + 1;
     return interpreter->stack;
 }
-}

@@ -7,7 +7,7 @@ EMSCRIPTEN_BINDINGS(bytecode_interpreter) {
     class_<BytecodeInterpreter>("BytecodeInterpreter")
         .constructor<>()
         .function("init", &init_interpreter, allow_raw_pointers())
-        .function("step", &step)
+        .function("step", &step, allow_raw_pointers())
         .function("getStack", &get_stack, allow_raw_pointers());
 
     register_vector<int>("IntVector");
