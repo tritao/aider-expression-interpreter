@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import { ASTToBytecode } from "./ast-to-bytecode.js";
-import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { BytecodeDisassembler } from "./bytecode-disassembler.js";
+import { BytecodeSerializer } from "./bytecode-serializer.js";
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
 
@@ -17,7 +17,9 @@ function main() {
 		console.log(
 			"  --emit-bytecode <input-file>  Emit bytecode binary from the specified test file.",
 		);
-		console.log("  --disassemble <bytecode-file> Disassemble bytecode from the specified binary file.");
+		console.log(
+			"  --disassemble <bytecode-file> Disassemble bytecode from the specified binary file.",
+		);
 		console.log("  --help                        Show this help message.");
 	} else if (args.length === 2 && args[0] === "--disassemble") {
 		const bytecodeFilePath = args[1];
