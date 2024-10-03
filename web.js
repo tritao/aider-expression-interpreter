@@ -1,8 +1,8 @@
 import { ASTToBytecode } from "./ast-to-bytecode.js";
 import { BytecodeDebugger } from "./bytecode-debugger.js";
 import { BytecodeInterpreter } from "./bytecode-interpreter.js";
-import { Lexer } from "./lexer.js";
 import { BytecodeSerializer } from "./bytecode-serializer.js";
+import { Lexer } from "./lexer.js";
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
 
 document
