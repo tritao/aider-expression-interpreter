@@ -12,9 +12,9 @@ body {
 }
 
 #debuggerStack ul {
-    @apply flex gap-2;
+	@apply flex gap-2;
 }
 
 #debuggerStack li {
-    @apply inline-block;
+	@apply inline-block;
 }
