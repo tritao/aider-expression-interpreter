@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.bg-yellow-200 {
+    background-color: #fefcbf;
+}
+
+#bytecodeStack div {
+    padding: 4px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#bytecodeStack div:last-child {
+    border-bottom: none;
+}
+
+#astTree {
+    white-space: pre-wrap;
+    font-family: monospace;
+}
