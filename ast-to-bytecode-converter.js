@@ -1,6 +1,6 @@
 import { Bytecode } from "./bytecode.js";
-import { NumberNode, BinaryOpNode } from "./parser.js";
 import { TokenType } from "./lexer.js";
+import { BinaryOpNode, NumberNode } from "./parser.js";
 
 class ASTToBytecodeConverter {
 	convert(node) {
