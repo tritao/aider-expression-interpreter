@@ -1,17 +1,17 @@
 import { describe, expect, it } from "bun:test";
-import { ASTToBytecodeConverter } from "./ast-to-bytecode-converter.js";
+import { ASTToBytecode } from "./ast-to-bytecode.js";
 import { Bytecode } from "./bytecode.js";
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
 
-describe("ASTToBytecodeConverter", () => {
+describe("ASTToBytecode", () => {
 	it("should convert simple addition", () => {
 		const lexer = new Lexer("3 + 5");
 		const tokens = lexer.tokenize();
 		const parser = new Parser(tokens);
 		const ast = parser.parse();
 
-		const converter = new ASTToBytecodeConverter();
+		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
 		const expectedBytecode = [

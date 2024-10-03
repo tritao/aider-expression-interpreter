@@ -2,7 +2,7 @@ import { Bytecode } from "./bytecode.js";
 import { TokenType } from "./lexer.js";
 import { BinaryOpNode, NumberNode } from "./parser.js";
 
-class ASTToBytecodeConverter {
+class ASTToBytecode {
 	convert(node) {
 		const bytecode = [];
 		this._convertNode(node, bytecode);
@@ -38,4 +38,4 @@ class ASTToBytecodeConverter {
 	}
 }
 
-export { ASTToBytecodeConverter };
+export { ASTToBytecode };
