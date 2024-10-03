@@ -23,8 +23,8 @@ class BytecodeSerializer {
 				);
 			}
 			buffer.push(bytecodeValue);
-			if (type === Bytecode.PUSH && args.length > 0) {
-				buffer.push(args[0]);
+			if (type === Bytecode.PUSH) {
+				buffer.push(args);
 			}
 		}
 		console.debug("Serialized buffer:", buffer);

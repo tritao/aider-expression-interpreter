@@ -3,7 +3,7 @@ import { Bytecode } from "./bytecode.js";
 
 test("serialize PUSH instruction", () => {
 	const serializer = new BytecodeSerializer();
-	const instructions = [{ type: Bytecode.PUSH, args: [10] }];
+	const instructions = [{ type: Bytecode.PUSH, args: 10 }];
 	const expected = new Uint8Array([0x01, 10]);
 	expect(serializer.serialize(instructions)).toEqual(expected);
 });
@@ -18,8 +18,8 @@ test("serialize ADD instruction", () => {
 test("serialize complex instruction set", () => {
 	const serializer = new BytecodeSerializer();
 	const instructions = [
-		{ type: Bytecode.PUSH, args: [10] },
-		{ type: Bytecode.PUSH, args: [20] },
+		{ type: Bytecode.PUSH, args: 10 },
+		{ type: Bytecode.PUSH, args: 20 },
 		{ type: Bytecode.ADD, args: [] },
 		{ type: Bytecode.HALT, args: [] },
 	];
