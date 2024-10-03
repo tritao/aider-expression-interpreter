@@ -17,6 +17,9 @@ EMSCRIPTEN_BINDINGS(bytecode_interpreter) {
             int stackSize;
             const int* stack = get_stack(&self, &stackSize);
             return val::array(stack, stack + stackSize);
+        }))
+        .function("getIP", optional_override([](BytecodeInterpreter& self) {
+            return self.ip;
         }));
 
     register_vector<int>("IntVector");
