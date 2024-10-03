@@ -23,8 +23,6 @@ class BytecodeWasmInterpreter {
 			throw new Error("WASM module not initialized");
 		}
 
-		const memory = new Uint8Array(this.instance.memory.buffer);
-		memory.set(bytecode, 0);
 
 		let result;
 		do {
