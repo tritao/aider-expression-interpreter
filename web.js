@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.urlencoded({ extended: true }));
 
 function generateHTML(content = "", expression = "") {
-  return `
+	return `
     <html>
       <body>
         <h1>Expression Evaluator</h1>
@@ -36,24 +36,29 @@ function generateHTML(content = "", expression = "") {
 }
 
 app.get("/", (req, res) => {
-  res.send(generateHTML());
+	res.send(generateHTML());
 });
 
 app.post("/", (req, res) => {
-  const expression = req.body.expression;
-  try {
-    const lexer = new Lexer(expression);
-    const tokens = lexer.tokenize();
+	const expression = req.body.expression;
+	try {
+		const lexer = new Lexer(expression);
+		const tokens = lexer.tokenize();
 
-    const parser = new Parser(tokens);
-    const ast = parser.parse();
+		const parser = new Parser(tokens);
+		const ast = parser.parse();
 
-    const result = ast.evaluate();
-    const astTree = renderAST(ast);
-    res.send(generateHTML(`<h2>Result: ${result}</h2><h2>AST:</h2><pre>${astTree}</pre>`, expression));
-  } catch (e) {
-    res.send(generateHTML(`<h2>Error: ${e.message}</h2>`, expression));
-  }
+		const result = ast.evaluate();
+		const astTree = renderAST(ast);
+		res.send(
+			generateHTML(
+				`<h2>Result: ${result}</h2><h2>AST:</h2><pre>${astTree}</pre>`,
+				expression,
+			),
+		);
+	} catch (e) {
+		res.send(generateHTML(`<h2>Error: ${e.message}</h2>`, expression));
+	}
 });
 
 function renderAST(node, depth = 0) {
