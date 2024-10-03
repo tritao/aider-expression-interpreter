@@ -14,14 +14,19 @@ Module().then(instance => {
         result = interpreter.step();
     } while (result > 0);
 
-    const stackSizePtr = instance._malloc(4);
-    const stackPtr = interpreter.getStack(stackSizePtr);
-    const stackSize = instance.getValue(stackSizePtr, 'i32');
+    const memory = new WebAssembly.Memory({ initial: 1 });
+    const memoryView = new DataView(memory.buffer);
+
+    const stackSizePtr = 0; // Use the first 4 bytes of memory for stack size
+    const stackPtr = 4; // Use the next bytes for the stack
+
+    interpreter.getStack(stackSizePtr);
+
+    const stackSize = memoryView.getInt32(stackSizePtr, true);
     const stack = [];
     for (let i = 0; i < stackSize; i++) {
-        stack.push(instance.getValue(stackPtr + i * 4, 'i32'));
+        stack.push(memoryView.getInt32(stackPtr + i * 4, true));
     }
-    instance._free(stackSizePtr);
 
     console.log('Final stack:', stack);
 });
