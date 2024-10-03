@@ -3,7 +3,6 @@ import { BytecodeDebugger } from "./bytecode-debugger.js";
 import { BytecodeInterpreter } from "./bytecode-interpreter.js";
 import { Lexer } from "./lexer.js";
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
-import { BytecodeWasmInterpreter } from "./bytecode-wasm-interpreter.js";
 
 document
 	.getElementById("expressionForm")
@@ -64,12 +63,12 @@ document.getElementById("resetButton").onclick = () => {
 };
 
 async function executeBytecode(bytecode, interpreterType = "js") {
-	console.log(bytecode)
 	let result;
 	if (interpreterType === "js") {
 		const interpreter = new BytecodeInterpreter();
 		result = interpreter.execute(bytecode);
 	} else if (interpreterType === "wasm") {
+		const BytecodeWasmInterpreter = (await import("./bytecode-wasm-interpreter.js")).BytecodeWasmInterpreter;
 		const interpreter = new BytecodeWasmInterpreter();
 		await interpreter.init(bytecode);
 		result = interpreter.execute();
