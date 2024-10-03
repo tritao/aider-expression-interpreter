@@ -52,15 +52,15 @@ app.post("/", (req, res) => {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-        const result = ast.evaluate();
-        const astTree = renderAST(ast);
-        const bytecodeStack = renderBytecodeStack(bytecode);
-        res.send(
-            generateHTML(
-                `<h2>Result: ${result}</h2><h2>Bytecode Stack:</h2><pre>${bytecodeStack}</pre><h2>AST:</h2><pre>${astTree}</pre>`,
-                expression,
-            ),
-        );
+		const result = ast.evaluate();
+		const astTree = renderAST(ast);
+		const bytecodeStack = renderBytecodeStack(bytecode);
+		res.send(
+			generateHTML(
+				`<h2>Result: ${result}</h2><h2>Bytecode Stack:</h2><pre>${bytecodeStack}</pre><h2>AST:</h2><pre>${astTree}</pre>`,
+				expression,
+			),
+		);
 	} catch (e) {
 		res.send(generateHTML(`<h2>Error: ${e.message}</h2>`, expression));
 	}
@@ -82,7 +82,9 @@ function renderAST(node, depth = 0) {
 }
 
 function renderBytecodeStack(bytecode) {
-    return bytecode.map((instruction, index) => `${index}: ${instruction}`).join("\n");
+	return bytecode
+		.map((instruction, index) => `${index}: ${instruction}`)
+		.join("\n");
 }
 
 app.listen(port, () => {
