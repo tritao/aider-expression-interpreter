@@ -3,7 +3,15 @@ import Module from "./c/bytecode_runner.mjs";
 class BytecodeWasmInterpreter {
 	constructor() {
 		this.instance = null;
+		this.interpreter = null;
 	}
+
+	async init(bytecode) {
+		if (!bytecode) {
+			throw new Error("Bytecode must be provided for initialization");
+		}
+		this.instance = await Module();
+		this.interpreter = new this.instance.BytecodeInterpreter();
 
 	async init(bytecode) {
 		if (!bytecode) {
