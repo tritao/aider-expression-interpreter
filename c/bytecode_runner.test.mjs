@@ -8,8 +8,9 @@ Module().then(instance => {
     let result;
     do {
         result = interpreter.step();
+        const ip = interpreter.getIP();
         const stack = interpreter.getStack();
-        console.log('Intermediate stack:', stack);
+        console.log(`IP: ${ip}, Intermediate stack:`, stack);
     } while (result > 0);
 
     const stack = interpreter.getStack();
