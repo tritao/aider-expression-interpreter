@@ -1,14 +1,15 @@
 import re
+from enum import Enum
 
-# Token types
-NUMBER = 'NUMBER'
-PLUS = 'PLUS'
-MINUS = 'MINUS'
-TIMES = 'TIMES'
-DIVIDE = 'DIVIDE'
-LPAREN = 'LPAREN'
-RPAREN = 'RPAREN'
-EOF = 'EOF'
+class TokenType(Enum):
+    NUMBER = 'NUMBER'
+    PLUS = 'PLUS'
+    MINUS = 'MINUS'
+    TIMES = 'TIMES'
+    DIVIDE = 'DIVIDE'
+    LPAREN = 'LPAREN'
+    RPAREN = 'RPAREN'
+    EOF = 'EOF'
 
 class LexerError(Exception):
     """Exception raised for errors in the lexer."""
@@ -67,43 +68,43 @@ class Lexer:
                 continue
 
             if self.current_char.isdigit():
-                return Token(NUMBER, self.number())
+                return Token(TokenType.NUMBER, self.number())
 
             if self.current_char == '+':
                 self.advance()
                 if self.current_char == '+':
                     self.error()
-                return Token(PLUS, '+')
+                return Token(TokenType.PLUS, '+')
 
             if self.current_char == '-':
                 self.advance()
                 if self.current_char == '-':
                     self.error()
-                return Token(MINUS, '-')
+                return Token(TokenType.MINUS, '-')
 
             if self.current_char == '*':
                 self.advance()
                 if self.current_char == '*':
                     self.error()
-                return Token(TIMES, '*')
+                return Token(TokenType.TIMES, '*')
 
             if self.current_char == '/':
                 self.advance()
                 if self.current_char == '/':
                     self.error()
-                return Token(DIVIDE, '/')
+                return Token(TokenType.DIVIDE, '/')
 
             if self.current_char == '(':
                 self.advance()
-                return Token(LPAREN, '(')
+                return Token(TokenType.LPAREN, '(')
 
             if self.current_char == ')':
                 self.advance()
-                return Token(RPAREN, ')')
+                return Token(TokenType.RPAREN, ')')
 
             self.error()
 
-        return Token(EOF, None)
+        return Token(TokenType.EOF, None)
 
     def tokenize(self):
         """Tokenize the entire input text and return a list of tokens."""
