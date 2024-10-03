@@ -63,18 +63,18 @@ app.post("/", (req, res) => {
 });
 
 function renderAST(node, depth = 0) {
-  let result = "";
-  const indent = "  ".repeat(depth);
-  if (node instanceof NumberNode) {
-    result += `${indent}NumberNode(${node.value})\n`;
-  } else if (node instanceof BinaryOpNode) {
-    result += `${indent}BinaryOpNode(\n`;
-    result += renderAST(node.left, depth + 1);
-    result += `${indent}  ${node.op.type}\n`;
-    result += renderAST(node.right, depth + 1);
-    result += `${indent})\n`;
-  }
-  return result;
+	let result = "";
+	const indent = "  ".repeat(depth);
+	if (node instanceof NumberNode) {
+		result += `${indent}NumberNode(${node.value})\n`;
+	} else if (node instanceof BinaryOpNode) {
+		result += `${indent}BinaryOpNode(\n`;
+		result += renderAST(node.left, depth + 1);
+		result += `${indent}  ${node.op.type}\n`;
+		result += renderAST(node.right, depth + 1);
+		result += `${indent})\n`;
+	}
+	return result;
 }
 
 app.listen(port, () => {
