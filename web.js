@@ -12,10 +12,23 @@ app.get("/", (req, res) => {
     <html>
       <body>
         <h1>Expression Evaluator</h1>
-        <form action="/" method="post">
-          <input type="text" name="expression" placeholder="Enter expression" required>
+        <form id="expressionForm" action="/" method="post">
+          <input id="expressionInput" type="text" name="expression" placeholder="Enter expression" required>
           <button type="submit">Evaluate</button>
         </form>
+        <div>
+          <button onclick="setExpression('3 + 5')">3 + 5</button>
+          <button onclick="setExpression('7 - 2 * 3')">7 - 2 * 3</button>
+          <button onclick="setExpression('(1 + 2) * 4')">(1 + 2) * 4</button>
+          <button onclick="setExpression('8 / 2')">8 / 2</button>
+          <button onclick="setExpression('3.14 + 2.71')">3.14 + 2.71</button>
+        </div>
+        <script>
+          function setExpression(expression) {
+            document.getElementById('expressionInput').value = expression;
+            document.getElementById('expressionForm').submit();
+          }
+        </script>
       </body>
     </html>
   `);
