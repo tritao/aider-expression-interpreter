@@ -67,18 +67,26 @@ class Lexer:
 
             if self.current_char == '+':
                 self.advance()
+                if self.current_char == '+':
+                    self.error()  # Raise an error for consecutive operators
                 return Token(PLUS, '+')
 
             if self.current_char == '-':
                 self.advance()
+                if self.current_char == '-':
+                    self.error()  # Raise an error for consecutive operators
                 return Token(MINUS, '-')
 
             if self.current_char == '*':
                 self.advance()
+                if self.current_char == '*':
+                    self.error()  # Raise an error for consecutive operators
                 return Token(TIMES, '*')
 
             if self.current_char == '/':
                 self.advance()
+                if self.current_char == '/':
+                    self.error()  # Raise an error for consecutive operators
                 return Token(DIVIDE, '/')
 
             if self.current_char == '(':
