@@ -41,11 +41,11 @@ describe('Parser', () => {
                 new NumberNode(3)
             )
         );
-        expect(ast.left.value).to.equal(expectedAst.left.value);
-        expect(ast.op.type).to.equal(expectedAst.op.type);
-        expect(ast.right.left.value).to.equal(expectedAst.right.left.value);
-        expect(ast.right.op.type).to.equal(expectedAst.right.op.type);
-        expect(ast.right.right.value).to.equal(expectedAst.right.right.value);
+        expect(ast.left.value).toBe(expectedAst.left.value);
+        expect(ast.op.type).toBe(expectedAst.op.type);
+        expect(ast.right.left.value).toBe(expectedAst.right.left.value);
+        expect(ast.right.op.type).toBe(expectedAst.right.op.type);
+        expect(ast.right.right.value).toBe(expectedAst.right.right.value);
     });
 
     it('should parse expressions with parentheses', () => {
