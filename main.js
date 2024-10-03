@@ -1,4 +1,4 @@
-import { createRequire } from "module";
+import { createRequire } from "node:module";
 import fs from "node:fs";
 import { ASTToBytecode } from "./ast-to-bytecode.js";
 const require = createRequire(import.meta.url);
@@ -25,7 +25,6 @@ function main() {
 		);
 		console.log("  --help                        Show this help message.");
 	} else if (args.length === 2 && args[0] === "--run-bytecode") {
-		const bytecodeFilePath = args[1];
 
 		try {
 			const bytecode = fs.readFileSync(bytecodeFilePath);
