@@ -1,5 +1,6 @@
 #include "bytecode_interpreter.h"
 #include <stdio.h>
+#include "bytecode_values.h"
 
 int execute_bytecode(const unsigned char *bytecode, size_t length) {
     int stack[256];
@@ -7,26 +8,26 @@ int execute_bytecode(const unsigned char *bytecode, size_t length) {
 
     for (size_t i = 0; i < length; ++i) {
         switch (bytecode[i]) {
-            case 0x01: // PUSH
+            case BYTECODE_PUSH: // PUSH
                 stack[++sp] = bytecode[++i];
                 break;
-            case 0x02: // ADD
+            case BYTECODE_ADD: // ADD
                 stack[sp - 1] = stack[sp - 1] + stack[sp];
                 sp--;
                 break;
-            case 0x03: // SUB
+            case BYTECODE_SUB: // SUB
                 stack[sp - 1] = stack[sp - 1] - stack[sp];
                 sp--;
                 break;
-            case 0x04: // MUL
+            case BYTECODE_MUL: // MUL
                 stack[sp - 1] = stack[sp - 1] * stack[sp];
                 sp--;
                 break;
-            case 0x05: // DIV
+            case BYTECODE_DIV: // DIV
                 stack[sp - 1] = stack[sp - 1] / stack[sp];
                 sp--;
                 break;
-            case 0x06: // HALT
+            case BYTECODE_HALT: // HALT
                 return stack[sp];
             default:
                 fprintf(stderr, "Unknown bytecode: %x\n", bytecode[i]);
