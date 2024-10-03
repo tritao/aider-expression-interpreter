@@ -6,7 +6,7 @@ SRCS = main.c bytecode_interpreter.c embindings.cpp
 all: $(TARGET)
 
 $(TARGET):
-	$(CC) $(CFLAGS) $(SRCS) -o $@ 
+	$(CC) $(CFLAGS) --bind $(SRCS) -o $@ 
 
 clean:
 	rm -f $(OBJS) $(TARGET)
