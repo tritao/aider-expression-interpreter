@@ -7,7 +7,14 @@ import { Parser } from "./parser.js";
 function main() {
 	const args = process.argv.slice(2);
 
-	if (args.length === 2 && args[0] === "--emit-bytecode") {
+	if (args.includes("--help")) {
+		console.log("Usage:");
+		console.log("  node main.js --emit-bytecode <input-file>");
+		console.log("  node main.js");
+		console.log("Options:");
+		console.log("  --emit-bytecode <input-file>  Emit bytecode binary from the specified test file.");
+		console.log("  --help                        Show this help message.");
+	} else if (args.length === 2 && args[0] === "--emit-bytecode") {
 		const inputFilePath = args[1];
 		const outputFilePath = inputFilePath.replace(".txt", ".bin");
 
