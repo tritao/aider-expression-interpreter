@@ -2,9 +2,9 @@ const isNode =
 	typeof process !== "undefined" &&
 	process.versions != null &&
 	process.versions.node != null;
-const Module = isNode
-	? await import("./c/bytecode_runner.node.mjs")
-	: await import("./c/bytecode_runner.browser.mjs");
+const ModulePromise = isNode
+	? import("./c/bytecode_runner.node.mjs")
+	: import("./c/bytecode_runner.browser.mjs");
 
 class BytecodeWasmInterpreter {
 	static moduleInstance = null;
