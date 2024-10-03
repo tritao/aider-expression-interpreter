@@ -82,16 +82,16 @@ function renderAST(node, depth = 0) {
 }
 
 function renderBytecodeStack(bytecode) {
-    let stackDisplay = "";
-    for (let i = 0; i < bytecode.length; i++) {
-        if (bytecode[i] === "PUSH") {
-            stackDisplay += `${i}: ${bytecode[i]} ${bytecode[i + 1]}\n`;
-            i++; // Skip the operand as it's already included
-        } else {
-            stackDisplay += `${i}: ${bytecode[i]}\n`;
-        }
-    }
-    return stackDisplay;
+	let stackDisplay = "";
+	for (let i = 0; i < bytecode.length; i++) {
+		if (bytecode[i] === "PUSH") {
+			stackDisplay += `${i}: ${bytecode[i]} ${bytecode[i + 1]}\n`;
+			i++; // Skip the operand as it's already included
+		} else {
+			stackDisplay += `${i}: ${bytecode[i]}\n`;
+		}
+	}
+	return stackDisplay;
 }
 
 app.listen(port, () => {
