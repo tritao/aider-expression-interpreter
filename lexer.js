@@ -74,21 +74,25 @@ class Lexer {
 
             if (this.currentChar === '+') {
                 this.advance();
+                if (this.currentChar === '+') this.error();
                 return new Token(TokenType.PLUS, '+');
             }
 
             if (this.currentChar === '-') {
                 this.advance();
+                if (this.currentChar === '-') this.error();
                 return new Token(TokenType.MINUS, '-');
             }
 
             if (this.currentChar === '*') {
                 this.advance();
+                if (this.currentChar === '*') this.error();
                 return new Token(TokenType.TIMES, '*');
             }
 
             if (this.currentChar === '/') {
                 this.advance();
+                if (this.currentChar === '/') this.error();
                 return new Token(TokenType.DIVIDE, '/');
             }
 
