@@ -1,7 +1,7 @@
 CC = emcc
 CFLAGS = -Wall -Wextra -O2 -g
 NODE_TARGET = bytecode_runner.node.mjs
-BROWSER_TARGET = bytecode_runner.browser.js
+BROWSER_TARGET = bytecode_runner.browser.mjs
 SRCS = bytecode_interpreter.c embindings.cpp
 
 all: $(NODE_TARGET) $(BROWSER_TARGET)
