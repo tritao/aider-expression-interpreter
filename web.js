@@ -13,7 +13,7 @@ document
 			const { result, astTree, bytecodeStack, bytecode } =
 				evaluateExpression(expression);
 			document.getElementById("resultValue").innerText = result;
-			document.getElementById("bytecodeStack").innerText = bytecodeStack;
+			document.getElementById("bytecodeStack").innerHTML = bytecodeStack;
 			document.getElementById("astTree").innerText = astTree;
 			initializeDebugger(bytecode);
 		} catch (e) {
