@@ -7,7 +7,7 @@ Module().then(instance => {
 
     const bytecode = new Uint8Array([1, 10, 1, 20, 2, 0]); // Example bytecode: PUSH 10, PUSH 20, ADD, HALT
     const interpreter = new instance.BytecodeInterpreter();
-    interpreter.init(bytecode, bytecode.length);
+    interpreter.init(bytecode);
 
     let result;
     do {

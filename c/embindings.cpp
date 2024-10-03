@@ -8,8 +8,9 @@ using namespace emscripten;
 EMSCRIPTEN_BINDINGS(bytecode_interpreter) {
     class_<BytecodeInterpreter>("BytecodeInterpreter")
         .constructor<>()
-        .function("init", optional_override([](BytecodeInterpreter& self, uintptr_t bytecodePtr, size_t length) {
-            init_interpreter(&self, reinterpret_cast<const unsigned char*>(bytecodePtr), length);
+        .function("init", optional_override([](BytecodeInterpreter& self, const val& bytecode) {
+            std::vector<unsigned char> bytecodeVec = vecFromJSArray<unsigned char>(bytecode);
+            init_interpreter(&self, bytecodeVec.data(), bytecodeVec.size());
         }))
         .function("step", &step, allow_raw_pointers())
         .function("getStack", &get_stack, allow_raw_pointers());
