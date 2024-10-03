@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expression Evaluator</title>
+    <script type="module" src="/src/client.js"></script>
+</head>
+<body>
+    <h1>Expression Evaluator</h1>
+    <form id="expressionForm">
+        <input id="expressionInput" type="text" name="expression" placeholder="Enter expression" required>
+        <button type="submit">Evaluate</button>
+    </form>
+    <div>
+        <button onclick="setExpression('3 + 5')">3 + 5</button>
+        <button onclick="setExpression('7 - 2 * 3')">7 - 2 * 3</button>
+        <button onclick="setExpression('(1 + 2) * 4')">(1 + 2) * 4</button>
+        <button onclick="setExpression('8 / 2')">8 / 2</button>
+        <button onclick="setExpression('3.14 + 2.71')">3.14 + 2.71</button>
+    </div>
+    <div id="result"></div>
+</body>
+</html>
