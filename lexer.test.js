@@ -32,7 +32,7 @@ describe('Lexer', () => {
             new Token(TokenType.NUMBER, 3),
             new Token(TokenType.EOF, null)
         ];
-        expect(tokens).to.deep.equal(expectedTokens);
+        expect(tokens).toEqual(expectedTokens);
     });
 
     it('should tokenize with parentheses', () => {
@@ -48,7 +48,7 @@ describe('Lexer', () => {
             new Token(TokenType.NUMBER, 4),
             new Token(TokenType.EOF, null)
         ];
-        expect(tokens).to.deep.equal(expectedTokens);
+        expect(tokens).toEqual(expectedTokens);
     });
 
     it('should handle whitespace', () => {
@@ -60,7 +60,7 @@ describe('Lexer', () => {
             new Token(TokenType.NUMBER, 10),
             new Token(TokenType.EOF, null)
         ];
-        expect(tokens).to.deep.equal(expectedTokens);
+        expect(tokens).toEqual(expectedTokens);
     });
 
     it('should throw error on invalid characters', () => {
@@ -77,7 +77,7 @@ describe('Lexer', () => {
             new Token(TokenType.NUMBER, 2.71),
             new Token(TokenType.EOF, null)
         ];
-        expect(tokens).to.deep.equal(expectedTokens);
+        expect(tokens).toEqual(expectedTokens);
     });
 
     it('should throw error on consecutive operators', () => {
