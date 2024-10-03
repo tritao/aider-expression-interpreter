@@ -6,7 +6,7 @@ SRCS = main.c bytecode_interpreter.c embindings.cpp
 all: $(TARGET)
 
 $(TARGET):
-	$(CC) $(CFLAGS) --bind $(SRCS) -o $@ 
+	$(CC) $(CFLAGS) --bind -s ENVIRONMENT=node $(SRCS) -o $@ 
 
 clean:
 	rm -f $(OBJS) $(TARGET)
