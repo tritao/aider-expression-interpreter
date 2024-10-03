@@ -12,6 +12,7 @@ document
 		try {
 			const { result, astTree, bytecodeStack, bytecode } =
 				evaluateExpression(expression);
+        console.log(bytecode)
 			document.getElementById("result").innerHTML = `
                 <h2>Result: ${result}</h2>
                 <h2>Bytecode Stack:</h2>
