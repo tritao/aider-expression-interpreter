@@ -12,13 +12,9 @@ document
 		try {
 			const { result, astTree, bytecodeStack, bytecode } =
 				evaluateExpression(expression);
-			document.getElementById("result").innerHTML = `
-                <h2>Result: ${result}</h2>
-                <h2>Bytecode Stack:</h2>
-                <pre>${bytecodeStack}</pre>
-                <h2>AST:</h2>
-                <pre>${astTree}</pre>
-            `;
+			document.getElementById("resultValue").innerText = result;
+			document.getElementById("bytecodeStack").innerText = bytecodeStack;
+			document.getElementById("astTree").innerText = astTree;
 			initializeDebugger(bytecode);
 		} catch (e) {
 			document.getElementById("result").innerHTML = `<h2>${e.message}</h2>`;
