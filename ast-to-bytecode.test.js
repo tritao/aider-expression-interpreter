@@ -31,7 +31,7 @@ describe("ASTToBytecode", () => {
 		const parser = new Parser(tokens);
 		const ast = parser.parse();
 
-		const converter = new ASTToBytecodeConverter();
+		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
 		const expectedBytecode = [
@@ -54,7 +54,7 @@ describe("ASTToBytecode", () => {
 		const parser = new Parser(tokens);
 		const ast = parser.parse();
 
-		const converter = new ASTToBytecodeConverter();
+		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
 		const expectedBytecode = [
@@ -74,7 +74,7 @@ describe("ASTToBytecode", () => {
 		const parser = new Parser(tokens);
 		const ast = parser.parse();
 
-		const converter = new ASTToBytecodeConverter();
+		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
 		const expectedBytecode = [
