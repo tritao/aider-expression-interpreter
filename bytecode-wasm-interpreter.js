@@ -12,6 +12,7 @@ class BytecodeWasmInterpreter {
 		}
 		this.instance = await Module();
 		this.interpreter = new this.instance.BytecodeInterpreter();
+	}
 
 	async init(bytecode) 
 		if (!bytecode) {
