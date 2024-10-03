@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send(`
+	res.send(`
     <html>
       <body>
         <h1>Expression Evaluator</h1>
@@ -22,16 +22,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  const expression = req.body.expression;
-  try {
-    const lexer = new Lexer(expression);
-    const tokens = lexer.tokenize();
+	const expression = req.body.expression;
+	try {
+		const lexer = new Lexer(expression);
+		const tokens = lexer.tokenize();
 
-    const parser = new Parser(tokens);
-    const ast = parser.parse();
+		const parser = new Parser(tokens);
+		const ast = parser.parse();
 
-    const result = ast.evaluate();
-    res.send(`
+		const result = ast.evaluate();
+		res.send(`
       <html>
         <body>
           <h1>Expression Evaluator</h1>
@@ -44,8 +44,8 @@ app.post("/", (req, res) => {
         </body>
       </html>
     `);
-  } catch (e) {
-    res.send(`
+	} catch (e) {
+		res.send(`
       <html>
         <body>
           <h1>Expression Evaluator</h1>
@@ -57,9 +57,9 @@ app.post("/", (req, res) => {
         </body>
       </html>
     `);
-  }
+	}
 });
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+	console.log(`Server running at http://localhost:${port}`);
 });
