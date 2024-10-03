@@ -21,10 +21,11 @@ class BytecodeSerializer {
 				throw new Error(
 					`No bytecode mapping for instruction type '${instruction.type}'`,
 				);
-			}
-			buffer.push(bytecodeValue);
-			if (instruction.type === Bytecode.PUSH) {
-				buffer.push(instruction.value);
+			} else {
+				buffer.push(bytecodeValue);
+				if (instruction.type === Bytecode.PUSH) {
+					buffer.push(instruction.value);
+				}
 			}
 		}
 		console.debug("Serialized buffer:", buffer);
