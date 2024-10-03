@@ -1,4 +1,4 @@
-import Module from './bytecode_runner.mjs';
+import Module from './bytecode_runner.node.mjs';
 
 Module().then(instance => {
     const bytecode = new Uint8Array([1, 10, 1, 20, 2, 6]); // Example bytecode: PUSH 10, PUSH 20, ADD, HALT

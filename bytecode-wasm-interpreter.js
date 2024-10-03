@@ -20,8 +20,7 @@ class BytecodeWasmInterpreter {
 		if (!BytecodeWasmInterpreter.moduleInstance) {
 			BytecodeWasmInterpreter.moduleInstance = await ModulePromise;
 		}
-		this.instance = BytecodeWasmInterpreter.moduleInstance;
-		console.log("Module instance:", this.instance);
+		this.instance = await BytecodeWasmInterpreter.moduleInstance.default();
 		if (!this.instance.BytecodeInterpreter) {
 			throw new Error("BytecodeInterpreter is not defined in the module");
 		}

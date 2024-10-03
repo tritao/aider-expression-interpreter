@@ -11,10 +11,8 @@ document
 		const expression = document.getElementById("expressionInput").value;
 		const interpreterType = document.getElementById("interpreterSelect").value;
 		try {
-			const { result, astTree, bytecodeStack, bytecode } = await evaluateExpression(
-				expression,
-				interpreterType,
-			);
+			const { result, astTree, bytecodeStack, bytecode } =
+				await evaluateExpression(expression, interpreterType);
 			document.getElementById("resultValue").innerText = result;
 			document.getElementById("bytecodeStack").innerHTML = bytecodeStack;
 			document.getElementById("astTree").innerText = astTree;
