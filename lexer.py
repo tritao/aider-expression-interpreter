@@ -14,6 +14,7 @@ class LexerError(Exception):
     """Exception raised for errors in the lexer."""
     def __init__(self, message):
         super().__init__(message)
+
 class Token:
     def __init__(self, type_, value):
         self.type = type_

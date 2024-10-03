@@ -15,7 +15,7 @@ class TestLexer(unittest.TestCase):
             Token('NUMBER', 3),
             Token('PLUS', '+'),
             Token('NUMBER', 5),
-        Token('EOF', None)
+            Token('EOF', None)
         ]
         self.assertEqual(tokens, expected_tokens)
 
@@ -60,7 +60,7 @@ class TestLexer(unittest.TestCase):
 
     def test_invalid_characters(self):
         lexer = Lexer("5 & 3")
-        with self.assertRaises(Exception):  # Adjust the exception type based on your implementation
+        with self.assertRaises(Exception):
             lexer.tokenize()
 
     def test_floating_point_numbers(self):
@@ -76,7 +76,7 @@ class TestLexer(unittest.TestCase):
 
     def test_consecutive_operators(self):
         lexer = Lexer("4++5")
-        with self.assertRaises(Exception):  # Adjust the exception type based on your implementation
+        with self.assertRaises(Exception):
             lexer.tokenize()
 
 if __name__ == '__main__':
