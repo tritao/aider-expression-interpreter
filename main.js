@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { BytecodeSerializer } from "./bytecode-serializer.js";
+import { ASTToBytecode } from "./ast-to-bytecode.js";
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
 
@@ -18,7 +19,8 @@ function main() {
 			const parser = new Parser(tokens);
 			const ast = parser.parse();
 
-			const instructions = ast.toInstructions();
+			const astToBytecode = new ASTToBytecode();
+			const instructions = astToBytecode.convert(ast);
 			const serializer = new BytecodeSerializer();
 			const bytecode = serializer.serialize(instructions);
 
