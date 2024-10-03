@@ -29,7 +29,7 @@ window.setExpression = function setExpression(expression) {
 	document.getElementById("expressionForm").requestSubmit();
 };
 
-function evaluateExpression(expression, interpreterType) {
+async function evaluateExpression(expression, interpreterType) {
 	try {
 		const lexer = new Lexer(expression);
 		const tokens = lexer.tokenize();
@@ -40,7 +40,7 @@ function evaluateExpression(expression, interpreterType) {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-		const result = executeBytecode(bytecode, interpreterType);
+		const result = await executeBytecode(bytecode, interpreterType);
 
 		const astTree = renderAST(ast);
 		const bytecodeStack = renderBytecodeStack(bytecode);
