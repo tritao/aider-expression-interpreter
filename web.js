@@ -1,6 +1,6 @@
 import express from "express";
 import { Lexer } from "./lexer.js";
-import { Parser } from "./parser.js";
+import { Parser, NumberNode, BinaryOpNode } from "./parser.js";
 
 const app = express();
 const port = 3000;
