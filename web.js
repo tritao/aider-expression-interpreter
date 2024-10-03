@@ -111,9 +111,9 @@ function initializeDebugger(bytecode) {
 function updateDebuggerUI(debuggerInstance) {
 	document.getElementById("debuggerStack").innerText =
 		`Stack: ${debuggerInstance.stack.join(", ")}`;
-	document.querySelectorAll('[id^="bytecode-"]').forEach((el) => {
+	for (const el of document.querySelectorAll('[id^="bytecode-"]')) {
 		el.classList.remove("bg-yellow-200");
-	});
+	}
 	const currentLine = document.getElementById(
 		`bytecode-${debuggerInstance.pc}`,
 	);
