@@ -33,6 +33,12 @@ int main(int argc, char *argv[]) {
     }
     fclose(file);
 
+    if (length == 0) {
+        fprintf(stderr, "Bytecode file is empty\n");
+        free(bytecode);
+        return 1;
+    }
+
     int result = execute_bytecode(bytecode, length);
     printf("Result: %d\n", result);
 
