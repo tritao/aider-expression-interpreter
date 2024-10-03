@@ -39,8 +39,24 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int result = execute_bytecode(bytecode, length);
-    printf("Result: %d\n", result);
+    BytecodeInterpreter interpreter;
+    init_interpreter(&interpreter, bytecode, length);
+
+    int step_result;
+    while ((step_result = step(&interpreter)) > 0) {
+        // Continue stepping through the bytecode
+    }
+
+    if (step_result == 0) {
+        int stack_size;
+        const int *stack = get_stack(&interpreter, &stack_size);
+        printf("Execution finished. Stack size: %d\n", stack_size);
+        for (int i = 0; i < stack_size; i++) {
+            printf("Stack[%d]: %d\n", i, stack[i]);
+        }
+    } else {
+        fprintf(stderr, "Error during bytecode execution\n");
+    }
 
     free(bytecode);
     return 0;
