@@ -14,7 +14,6 @@ class BytecodeWasmInterpreter {
 		this.interpreter = new this.instance.BytecodeInterpreter();
 	}
 
-
 	execute(bytecode) {
 		if (!this.instance) {
 			throw new Error("WASM module not initialized");
