@@ -81,10 +81,10 @@ function renderBytecodeStack(bytecode) {
 	let stackDisplay = "";
 	for (let i = 0; i < bytecode.length; i++) {
 		if (bytecode[i] === "PUSH") {
-			stackDisplay += `${i}: ${bytecode[i]} ${bytecode[i + 1]}\n`;
+			stackDisplay += `<div id="bytecode-${i}">${i}: ${bytecode[i]} ${bytecode[i + 1]}</div>`;
 			i++; // Skip the operand as it's already included
 		} else {
-			stackDisplay += `${i}: ${bytecode[i]}\n`;
+			stackDisplay += `<div id="bytecode-${i}">${i}: ${bytecode[i]}</div>`;
 		}
 	}
 	return stackDisplay;
@@ -109,8 +109,14 @@ function initializeDebugger(bytecode) {
 }
 
 function updateDebuggerUI(debuggerInstance) {
-	document.getElementById("debuggerStack").innerText =
-		`Stack: ${debuggerInstance.stack.join(", ")}`;
+	document.getElementById("debuggerStack").innerText = `Stack: ${debuggerInstance.stack.join(", ")}`;
+	document.querySelectorAll('[id^="bytecode-"]').forEach((el) => {
+		el.classList.remove("bg-yellow-200");
+	});
+	const currentLine = document.getElementById(`bytecode-${debuggerInstance.pc}`);
+	if (currentLine) {
+		currentLine.classList.add("bg-yellow-200");
+	}
 	document.getElementById("debuggerPC").innerText =
 		`Program Counter: ${debuggerInstance.pc}`;
 }
