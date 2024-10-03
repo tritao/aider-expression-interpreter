@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import fs from "node:fs";
-import { describe, it, expect } from "bun:test";
 import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
 
@@ -21,7 +21,9 @@ describe("Arithmetic Expression Evaluation", () => {
 		it(`should evaluate ${testFile} correctly`, () => {
 			const expectedOutputFile = testFile.replace(".txt", ".out");
 			const input = fs.readFileSync(testFile, "utf-8").trim();
-			const expectedOutput = fs.readFileSync(expectedOutputFile, "utf-8").trim();
+			const expectedOutput = fs
+				.readFileSync(expectedOutputFile, "utf-8")
+				.trim();
 
 			const lexer = new Lexer(input);
 			const tokens = lexer.tokenize();
