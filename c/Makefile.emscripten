@@ -1,7 +1,7 @@
 CC = emcc
 CFLAGS = -Wall -Wextra -O2 -g
 TARGET = bytecode_runner.js
-SRCS = main.c bytecode_interpreter.c
+SRCS = main.c bytecode_interpreter.c embindings.cpp
 
 all: $(TARGET)
 
