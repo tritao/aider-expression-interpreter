@@ -4,11 +4,17 @@ class NumberNode:
     def __init__(self, value):
         self.value = value
 
+    def __repr__(self):
+        return f"NumberNode({self.value})"
+
 class BinaryOpNode:
     def __init__(self, left, op, right):
         self.left = left
         self.op = op
         self.right = right
+
+    def __repr__(self):
+        return f"BinaryOpNode({repr(self.left)}, {self.op.type}, {repr(self.right)})"
 
 class Parser:
     def __init__(self, tokens):
