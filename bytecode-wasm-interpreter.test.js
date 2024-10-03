@@ -19,12 +19,11 @@ describe("BytecodeWasmInterpreter", () => {
 		expect(result).toEqual([30]); // Expect the stack to contain the result of 10 + 20
 	});
 
-	// test("should handle empty bytecode", async () => {
-	// 	const bytecodeStr = "";
-	// 	const bytecode = parseBytecode(bytecodeStr);
-	// 	await interpreter.init(bytecode);
-	// 	expect(() => interpreter.execute()).toThrow(
-	// 		"Unknown instruction: undefined",
-	// 	);
-	// });
+	test("should handle empty bytecode", async () => {
+		const bytecodeStr = "";
+		const bytecode = parseBytecode(bytecodeStr);
+		await interpreter.init(bytecode);
+		const result = interpreter.execute();
+		expect(result).toEqual([]);
+	});
 });
