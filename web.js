@@ -57,13 +57,13 @@ function evaluateExpression(expression) {
 }
 
 document.getElementById("resetButton").onclick = () => {
-    const expression = document.getElementById("expressionInput").value;
-    try {
-        const { bytecode } = evaluateExpression(expression);
-        initializeDebugger(bytecode);
-    } catch (e) {
-        alert(e.message);
-    }
+	const expression = document.getElementById("expressionInput").value;
+	try {
+		const { bytecode } = evaluateExpression(expression);
+		initializeDebugger(bytecode);
+	} catch (e) {
+		alert(e.message);
+	}
 };
 
 function renderAST(node, depth = 0) {
