@@ -1,4 +1,4 @@
-import Module from "./bytecode_runner.mjs";
+import Module from "./c/bytecode_runner.mjs";
 
 class BytecodeWasmInterpreter {
 	constructor() {
