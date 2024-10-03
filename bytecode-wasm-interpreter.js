@@ -23,7 +23,6 @@ class BytecodeWasmInterpreter {
 			throw new Error("WASM module not initialized");
 		}
 
-
 		let result;
 		do {
 			result = this.instance.step();
