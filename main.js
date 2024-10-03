@@ -2,7 +2,7 @@ import { Lexer } from "./lexer.js";
 import { Parser } from "./parser.js";
 
 function main() {
-	const readline = require("readline");
+	const readline = require("node:readline");
 	const rl = readline.createInterface({
 		input: process.stdin,
 		output: process.stdout,

@@ -102,14 +102,14 @@ class Parser {
 		if (token.type === TokenType.NUMBER) {
 			this.eat(TokenType.NUMBER);
 			return new NumberNode(token.value);
-		} else if (token.type === TokenType.LPAREN) {
+		}
+		if (token.type === TokenType.LPAREN) {
 			this.eat(TokenType.LPAREN);
 			const node = this.expr();
 			this.eat(TokenType.RPAREN);
 			return node;
-		} else {
-			this.error();
 		}
+		this.error();
 	}
 }
 

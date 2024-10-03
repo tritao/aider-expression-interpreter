@@ -1,13 +1,13 @@
-class TokenType {
-	static NUMBER = "NUMBER";
-	static PLUS = "PLUS";
-	static MINUS = "MINUS";
-	static TIMES = "TIMES";
-	static DIVIDE = "DIVIDE";
-	static LPAREN = "LPAREN";
-	static RPAREN = "RPAREN";
-	static EOF = "EOF";
-}
+const TokenType = {
+	NUMBER: "NUMBER",
+	PLUS: "PLUS",
+	MINUS: "MINUS",
+	TIMES: "TIMES",
+	DIVIDE: "DIVIDE",
+	LPAREN: "LPAREN",
+	RPAREN: "RPAREN",
+	EOF: "EOF",
+};
 
 class LexerError extends Error {
 	constructor(message) {

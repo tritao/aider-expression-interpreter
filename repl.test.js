@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { spawn } from "child_process";
+import { spawn } from "node:child_process";
 
 describe("REPL", () => {
 	it("should evaluate simple expressions", (done) => {
