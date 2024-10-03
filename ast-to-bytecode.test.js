@@ -1,7 +1,8 @@
 import { describe, expect, it } from "bun:test";
 import { Bytecode } from "./bytecode.js";
 import { Lexer } from "./lexer.js";
-import { ASTToBytecodeConverter, Parser } from "./parser.js";
+import { Parser } from "./parser.js";
+import { ASTToBytecodeConverter } from "./ast-to-bytecode-converter.js";
 
 describe("ASTToBytecodeConverter", () => {
 	it("should convert simple addition", () => {
