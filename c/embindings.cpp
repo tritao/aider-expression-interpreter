@@ -2,12 +2,6 @@
 #include <emscripten/emscripten.h>
 #include "bytecode_interpreter.h"
 
-extern "C" {
-    EMSCRIPTEN_KEEPALIVE
-    void* malloc(size_t size) {
-        return std::malloc(size);
-    }
-}
 
 using namespace emscripten;
 
