@@ -55,7 +55,6 @@ class Lexer:
         return float(result) if '.' in result else int(result)
 
     def get_next_token(self):
-        """Lexical analyzer (also known as scanner or tokenizer)"""
         while self.current_char is not None:
 
             if self.current_char.isspace():
@@ -68,25 +67,25 @@ class Lexer:
             if self.current_char == '+':
                 self.advance()
                 if self.current_char == '+':
-                    self.error()  # Raise an error for consecutive operators
+                    self.error()
                 return Token(PLUS, '+')
 
             if self.current_char == '-':
                 self.advance()
                 if self.current_char == '-':
-                    self.error()  # Raise an error for consecutive operators
+                    self.error()
                 return Token(MINUS, '-')
 
             if self.current_char == '*':
                 self.advance()
                 if self.current_char == '*':
-                    self.error()  # Raise an error for consecutive operators
+                    self.error()
                 return Token(TIMES, '*')
 
             if self.current_char == '/':
                 self.advance()
                 if self.current_char == '/':
-                    self.error()  # Raise an error for consecutive operators
+                    self.error()
                 return Token(DIVIDE, '/')
 
             if self.current_char == '(':
