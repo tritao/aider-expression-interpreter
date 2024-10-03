@@ -7,13 +7,13 @@ const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-	res.send(`
+function generateHTML(content = "", expression = "") {
+  return `
     <html>
       <body>
         <h1>Expression Evaluator</h1>
         <form id="expressionForm" action="/" method="post">
-          <input id="expressionInput" type="text" name="expression" placeholder="Enter expression" required>
+          <input id="expressionInput" type="text" name="expression" placeholder="Enter expression" value="${expression}" required>
           <button type="submit">Evaluate</button>
         </form>
         <div>
@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
           <button onclick="setExpression('8 / 2')">8 / 2</button>
           <button onclick="setExpression('3.14 + 2.71')">3.14 + 2.71</button>
         </div>
+        ${content}
         <script>
           function setExpression(expression) {
             document.getElementById('expressionInput').value = expression;
@@ -31,48 +32,28 @@ app.get("/", (req, res) => {
         </script>
       </body>
     </html>
-  `);
+  `;
+}
+
+app.get("/", (req, res) => {
+  res.send(generateHTML());
 });
 
 app.post("/", (req, res) => {
-	const expression = req.body.expression;
-	try {
-		const lexer = new Lexer(expression);
-		const tokens = lexer.tokenize();
+  const expression = req.body.expression;
+  try {
+    const lexer = new Lexer(expression);
+    const tokens = lexer.tokenize();
 
-		const parser = new Parser(tokens);
-		const ast = parser.parse();
+    const parser = new Parser(tokens);
+    const ast = parser.parse();
 
-		const result = ast.evaluate();
-		const astTree = renderAST(ast);
-		res.send(`
-      <html>
-        <body>
-          <h1>Expression Evaluator</h1>
-          <form action="/" method="post">
-            <input type="text" name="expression" placeholder="Enter expression" required>
-            <button type="submit">Evaluate</button>
-          </form>
-          <h2>Result: ${result}</h2>
-          <h2>AST:</h2>
-          <pre>${astTree}</pre>
-        </body>
-      </html>
-    `);
-	} catch (e) {
-		res.send(`
-      <html>
-        <body>
-          <h1>Expression Evaluator</h1>
-          <form action="/" method="post">
-            <input type="text" name="expression" placeholder="Enter expression" required>
-            <button type="submit">Evaluate</button>
-          </form>
-          <h2>Error: ${e.message}</h2>
-        </body>
-      </html>
-    `);
-	}
+    const result = ast.evaluate();
+    const astTree = renderAST(ast);
+    res.send(generateHTML(`<h2>Result: ${result}</h2><h2>AST:</h2><pre>${astTree}</pre>`, expression));
+  } catch (e) {
+    res.send(generateHTML(`<h2>Error: ${e.message}</h2>`, expression));
+  }
 });
 
 function renderAST(node, depth = 0) {
