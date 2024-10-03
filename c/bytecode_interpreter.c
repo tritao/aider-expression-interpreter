@@ -3,6 +3,7 @@
 #include "bytecode_values.h"
 
 void init_interpreter(BytecodeInterpreter *interpreter, const unsigned char *bytecode, size_t length) {
+    printf("Initializing interpreter with bytecode size: %zu\n", length);
     interpreter->bytecode = bytecode;
     interpreter->length = length;
     interpreter->sp = -1;
