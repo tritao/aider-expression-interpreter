@@ -109,11 +109,14 @@ function initializeDebugger(bytecode) {
 }
 
 function updateDebuggerUI(debuggerInstance) {
-	document.getElementById("debuggerStack").innerText = `Stack: ${debuggerInstance.stack.join(", ")}`;
+	document.getElementById("debuggerStack").innerText =
+		`Stack: ${debuggerInstance.stack.join(", ")}`;
 	document.querySelectorAll('[id^="bytecode-"]').forEach((el) => {
 		el.classList.remove("bg-yellow-200");
 	});
-	const currentLine = document.getElementById(`bytecode-${debuggerInstance.pc}`);
+	const currentLine = document.getElementById(
+		`bytecode-${debuggerInstance.pc}`,
+	);
 	if (currentLine) {
 		currentLine.classList.add("bg-yellow-200");
 	}
