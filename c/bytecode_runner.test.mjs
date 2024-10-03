@@ -16,13 +16,7 @@ Module().then(instance => {
     const stackSizePtr = 0; // Use the first 4 bytes of memory for stack size
     const stackPtr = 4; // Use the next bytes for the stack
 
-    interpreter.getStack(stackSizePtr);
-
-    const stackSize = memoryView.getInt32(stackSizePtr, true);
-    const stack = [];
-    for (let i = 0; i < stackSize; i++) {
-        stack.push(memoryView.getInt32(stackPtr + i * 4, true));
-    }
+    const stack = interpreter.getStack();
 
     console.log('Final stack:', stack);
 });
