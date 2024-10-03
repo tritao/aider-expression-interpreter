@@ -2,37 +2,50 @@
 #include <stdio.h>
 #include "bytecode_values.h"
 
-int execute_bytecode(const unsigned char *bytecode, size_t length) {
-    int stack[256];
-    int sp = -1; // Stack pointer
+void init_interpreter(BytecodeInterpreter *interpreter, const unsigned char *bytecode, size_t length) {
+    interpreter->bytecode = bytecode;
+    interpreter->length = length;
+    interpreter->sp = -1;
+    interpreter->ip = 0;
+}
 
-    for (size_t i = 0; i < length; ++i) {
-        switch (bytecode[i]) {
-            case BYTECODE_PUSH: // PUSH
-                stack[++sp] = bytecode[++i];
-                break;
-            case BYTECODE_ADD: // ADD
-                stack[sp - 1] = stack[sp - 1] + stack[sp];
-                sp--;
-                break;
-            case BYTECODE_SUB: // SUB
-                stack[sp - 1] = stack[sp - 1] - stack[sp];
-                sp--;
-                break;
-            case BYTECODE_MUL: // MUL
-                stack[sp - 1] = stack[sp - 1] * stack[sp];
-                sp--;
-                break;
-            case BYTECODE_DIV: // DIV
-                stack[sp - 1] = stack[sp - 1] / stack[sp];
-                sp--;
-                break;
-            case BYTECODE_HALT: // HALT
-                return stack[sp];
-            default:
-                fprintf(stderr, "Unknown bytecode: %x\n", bytecode[i]);
-                return -1;
-        }
+int step(BytecodeInterpreter *interpreter) {
+    if (interpreter->ip >= interpreter->length) {
+        return -1; // No more instructions
     }
-    return -1;
+
+    switch (interpreter->bytecode[interpreter->ip]) {
+        case BYTECODE_PUSH: // PUSH
+            interpreter->stack[++interpreter->sp] = interpreter->bytecode[++interpreter->ip];
+            break;
+        case BYTECODE_ADD: // ADD
+            interpreter->stack[interpreter->sp - 1] = interpreter->stack[interpreter->sp - 1] + interpreter->stack[interpreter->sp];
+            interpreter->sp--;
+            break;
+        case BYTECODE_SUB: // SUB
+            interpreter->stack[interpreter->sp - 1] = interpreter->stack[interpreter->sp - 1] - interpreter->stack[interpreter->sp];
+            interpreter->sp--;
+            break;
+        case BYTECODE_MUL: // MUL
+            interpreter->stack[interpreter->sp - 1] = interpreter->stack[interpreter->sp - 1] * interpreter->stack[interpreter->sp];
+            interpreter->sp--;
+            break;
+        case BYTECODE_DIV: // DIV
+            interpreter->stack[interpreter->sp - 1] = interpreter->stack[interpreter->sp - 1] / interpreter->stack[interpreter->sp];
+            interpreter->sp--;
+            break;
+        case BYTECODE_HALT: // HALT
+            return 0; // Indicate halt
+        default:
+            fprintf(stderr, "Unknown bytecode: %x\n", interpreter->bytecode[interpreter->ip]);
+            return -1;
+    }
+    interpreter->ip++;
+    return 1; // Indicate successful step
+}
+
+const int* get_stack(const BytecodeInterpreter *interpreter, int *stack_size) {
+    *stack_size = interpreter->sp + 1;
+    return interpreter->stack;
+}
 }
