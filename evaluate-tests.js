@@ -31,6 +31,8 @@ testFiles.forEach((testFile) => {
 	if (result.toString() === expectedOutput) {
 		console.log(`${testFile}: PASS`);
 	} else {
-		console.error(`${testFile}: FAIL (Expected: ${expectedOutput}, Got: ${result})`);
+		console.error(
+			`${testFile}: FAIL (Expected: ${expectedOutput}, Got: ${result})`,
+		);
 	}
 });
