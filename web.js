@@ -1,6 +1,7 @@
 import express from "express";
 import { Lexer } from "./lexer.js";
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
+import { ASTToBytecode } from "./ast-to-bytecode.js";
 
 const app = express();
 const port = 3000;
@@ -48,11 +49,14 @@ app.post("/", (req, res) => {
 		const parser = new Parser(tokens);
 		const ast = parser.parse();
 
+		const converter = new ASTToBytecode();
+		const bytecode = converter.convert(ast);
+
 		const result = ast.evaluate();
 		const astTree = renderAST(ast);
 		res.send(
 			generateHTML(
-				`<h2>Result: ${result}</h2><h2>AST:</h2><pre>${astTree}</pre>`,
+				`<h2>Result: ${result}</h2><h2>Bytecode:</h2><pre>${bytecode.join(' ')}</pre><h2>AST:</h2><pre>${astTree}</pre>`,
 				expression,
 			),
 		);
