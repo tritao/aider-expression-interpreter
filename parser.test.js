@@ -62,11 +62,11 @@ describe('Parser', () => {
             new Token(TokenType.TIMES, '*'),
             new NumberNode(4)
         );
-        expect(ast.left.left.value).to.equal(expectedAst.left.left.value);
-        expect(ast.left.op.type).to.equal(expectedAst.left.op.type);
-        expect(ast.left.right.value).to.equal(expectedAst.left.right.value);
-        expect(ast.op.type).to.equal(expectedAst.op.type);
-        expect(ast.right.value).to.equal(expectedAst.right.value);
+        expect(ast.left.left.value).toBe(expectedAst.left.left.value);
+        expect(ast.left.op.type).toBe(expectedAst.left.op.type);
+        expect(ast.left.right.value).toBe(expectedAst.left.right.value);
+        expect(ast.op.type).toBe(expectedAst.op.type);
+        expect(ast.right.value).toBe(expectedAst.right.value);
     });
 
     it('should parse division', () => {

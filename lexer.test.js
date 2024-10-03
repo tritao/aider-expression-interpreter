@@ -82,6 +82,6 @@ describe('Lexer', () => {
 
     it('should throw error on consecutive operators', () => {
         const lexer = new Lexer("4++5");
-        expect(() => lexer.tokenize()).to.throw();
+        expect(() => lexer.tokenize()).toThrow();
     });
 });
