@@ -26,12 +26,7 @@ function generateHTML(content = "", expression = "") {
           <button onclick="setExpression('3.14 + 2.71')">3.14 + 2.71</button>
         </div>
         ${content}
-        <script>
-          function setExpression(expression) {
-            document.getElementById('expressionInput').value = expression;
-            document.getElementById('expressionForm').submit();
-          }
-        </script>
+        <script src="/dist/client.js"></script>
       </body>
     </html>
   `;
