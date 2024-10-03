@@ -36,6 +36,7 @@ int step(BytecodeInterpreter *interpreter) {
             interpreter->sp--;
             break;
         case BYTECODE_HALT: // HALT
+            interpreter->ip++;
             return 0; // Indicate halt
         default:
             fprintf(stderr, "Unknown bytecode: %x\n", interpreter->bytecode[interpreter->ip]);
