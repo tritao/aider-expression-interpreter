@@ -3,7 +3,6 @@ import Module from "./c/bytecode_runner.mjs";
 class BytecodeWasmInterpreter {
 	constructor() {
 		this.instance = null;
-		this.instance = new Module.BytecodeInterpreter();
 	}
 
 	async init(bytecode) {
