@@ -18,7 +18,11 @@ def main():
             ast = parser.parse()
 
             # Print the AST
-            print(ast)
+            print("AST:", ast)
+
+            # Evaluate the AST and print the result
+            result = ast.evaluate()
+            print("Result:", result)
 
         except Exception as e:
             print(f"Error: {e}")

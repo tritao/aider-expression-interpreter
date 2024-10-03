@@ -4,6 +4,9 @@ class NumberNode:
     def __init__(self, value):
         self.value = value
 
+    def evaluate(self):
+        return self.value
+
     def __repr__(self):
         return f"NumberNode({self.value})"
 
@@ -12,6 +15,16 @@ class BinaryOpNode:
         self.left = left
         self.op = op
         self.right = right
+
+    def evaluate(self):
+        if self.op.type == TokenType.PLUS:
+            return self.left.evaluate() + self.right.evaluate()
+        elif self.op.type == TokenType.MINUS:
+            return self.left.evaluate() - self.right.evaluate()
+        elif self.op.type == TokenType.TIMES:
+            return self.left.evaluate() * self.right.evaluate()
+        elif self.op.type == TokenType.DIVIDE:
+            return self.left.evaluate() / self.right.evaluate()
 
     def __repr__(self):
         return f"BinaryOpNode({repr(self.left)}, {self.op.type}, {repr(self.right)})"
