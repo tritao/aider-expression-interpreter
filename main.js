@@ -64,6 +64,7 @@ function main() {
 		} catch (e) {
 			console.error(`Error: ${e.message}`);
 		}
+	} else {
 		const readline = require("node:readline");
 		const rl = readline.createInterface({
 			input: process.stdin,

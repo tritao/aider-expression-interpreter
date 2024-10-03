@@ -4916,10 +4916,6 @@ var tempI64;
       });
     };
 
-  var __embind_register_optional = (rawOptionalType, rawType) => {
-      __embind_register_emval(rawOptionalType);
-    };
-
   
   
   
@@ -5236,6 +5232,123 @@ var tempI64;
       }
       return impl;
     };
+  
+  var emval_returnValue = (returnType, destructorsRef, handle) => {
+      var destructors = [];
+      var result = returnType['toWireType'](destructors, handle);
+      if (destructors.length) {
+        // void, primitives and any other types w/o destructors don't need to allocate a handle
+        HEAPU32[((destructorsRef)>>2)] = Emval.toHandle(destructors);
+      }
+      return result;
+    };
+  var __emval_as = (handle, returnType, destructorsRef) => {
+      handle = Emval.toValue(handle);
+      returnType = requireRegisteredType(returnType, 'emval::as');
+      return emval_returnValue(returnType, destructorsRef, handle);
+    };
+
+  var emval_symbols = {
+  };
+  
+  var getStringOrSymbol = (address) => {
+      var symbol = emval_symbols[address];
+      if (symbol === undefined) {
+        return readLatin1String(address);
+      }
+      return symbol;
+    };
+  
+  var emval_methodCallers = [];
+  
+  var __emval_call_method = (caller, objHandle, methodName, destructorsRef, args) => {
+      caller = emval_methodCallers[caller];
+      objHandle = Emval.toValue(objHandle);
+      methodName = getStringOrSymbol(methodName);
+      return caller(objHandle, objHandle[methodName], destructorsRef, args);
+    };
+
+
+  var emval_addMethodCaller = (caller) => {
+      var id = emval_methodCallers.length;
+      emval_methodCallers.push(caller);
+      return id;
+    };
+  
+  var emval_lookupTypes = (argCount, argTypes) => {
+      var a = new Array(argCount);
+      for (var i = 0; i < argCount; ++i) {
+        a[i] = requireRegisteredType(HEAPU32[(((argTypes)+(i * 4))>>2)],
+                                     "parameter " + i);
+      }
+      return a;
+    };
+  
+  
+  var reflectConstruct = Reflect.construct;
+  
+  
+  var __emval_get_method_caller = (argCount, argTypes, kind) => {
+      var types = emval_lookupTypes(argCount, argTypes);
+      var retType = types.shift();
+      argCount--; // remove the shifted off return type
+  
+      var functionBody =
+        `return function (obj, func, destructorsRef, args) {\n`;
+  
+      var offset = 0;
+      var argsList = []; // 'obj?, arg0, arg1, arg2, ... , argN'
+      if (kind === /* FUNCTION */ 0) {
+        argsList.push("obj");
+      }
+      var params = ["retType"];
+      var args = [retType];
+      for (var i = 0; i < argCount; ++i) {
+        argsList.push("arg" + i);
+        params.push("argType" + i);
+        args.push(types[i]);
+        functionBody +=
+          `  var arg${i} = argType${i}.readValueFromPointer(args${offset ? "+" + offset : ""});\n`;
+        offset += types[i]['argPackAdvance'];
+      }
+      var invoker = kind === /* CONSTRUCTOR */ 1 ? 'new func' : 'func.call';
+      functionBody +=
+        `  var rv = ${invoker}(${argsList.join(", ")});\n`;
+      if (!retType.isVoid) {
+        params.push("emval_returnValue");
+        args.push(emval_returnValue);
+        functionBody +=
+          "  return emval_returnValue(retType, destructorsRef, rv);\n";
+      }
+      functionBody +=
+        "};\n";
+  
+      params.push(functionBody);
+      var invokerFunction = newFunc(Function, params)(...args);
+      var functionName = `methodCaller<(${types.map(t => t.name).join(', ')}) => ${retType.name}>`;
+      return emval_addMethodCaller(createNamedFunction(functionName, invokerFunction));
+    };
+
+  var __emval_get_property = (handle, key) => {
+      handle = Emval.toValue(handle);
+      key = Emval.toValue(key);
+      return Emval.toHandle(handle[key]);
+    };
+
+  var __emval_new_array = () => Emval.toHandle([]);
+
+  
+  var __emval_new_cstring = (v) => Emval.toHandle(getStringOrSymbol(v));
+
+  
+  
+  var __emval_run_destructors = (handle) => {
+      var destructors = Emval.toValue(handle);
+      runDestructors(destructors);
+      __emval_decref(handle);
+    };
+
+  
   var __emval_take_value = (type, arg) => {
       type = requireRegisteredType(type, '_emval_take_value');
       var v = type['readValueFromPointer'](arg);
@@ -5433,8 +5546,6 @@ var wasmImports = {
   /** @export */
   _embind_register_memory_view: __embind_register_memory_view,
   /** @export */
-  _embind_register_optional: __embind_register_optional,
-  /** @export */
   _embind_register_std_string: __embind_register_std_string,
   /** @export */
   _embind_register_std_wstring: __embind_register_std_wstring,
@@ -5442,6 +5553,22 @@ var wasmImports = {
   _embind_register_void: __embind_register_void,
   /** @export */
   _emscripten_memcpy_js: __emscripten_memcpy_js,
+  /** @export */
+  _emval_as: __emval_as,
+  /** @export */
+  _emval_call_method: __emval_call_method,
+  /** @export */
+  _emval_decref: __emval_decref,
+  /** @export */
+  _emval_get_method_caller: __emval_get_method_caller,
+  /** @export */
+  _emval_get_property: __emval_get_property,
+  /** @export */
+  _emval_new_array: __emval_new_array,
+  /** @export */
+  _emval_new_cstring: __emval_new_cstring,
+  /** @export */
+  _emval_run_destructors: __emval_run_destructors,
   /** @export */
   _emval_take_value: __emval_take_value,
   /** @export */

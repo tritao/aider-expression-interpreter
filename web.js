@@ -7,7 +7,7 @@ let wasmModule;
 
 async function loadWasm() {
 	try {
-		const response = await fetch('/bytecode_runner.wasm');
+		const response = await fetch("/bytecode_runner.wasm");
 		const buffer = await response.arrayBuffer();
 		const { instance } = await WebAssembly.instantiate(buffer);
 		wasmModule = instance.exports;
