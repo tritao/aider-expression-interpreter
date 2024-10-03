@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if (fread(bytecode, 1, length, file) != length) {
+    if (fread(bytecode, 1, length, file) != (size_t)length) {
         perror("Failed to read bytecode");
         free(bytecode);
         return 1;
