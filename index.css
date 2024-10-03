@@ -7,3 +7,6 @@ body {
 #astTree {
     @apply whitespace-pre-wrap font-mono;
 }
+#bytecodeStack > div {
+    @apply m-0 p-0;
+}
