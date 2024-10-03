@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+	background-color: #f0f4f8; /* Light gray-blue background */
+}
 #astTree {
 	white-space: pre-wrap;
 	font-family: monospace;
