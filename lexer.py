@@ -42,10 +42,12 @@ class Lexer:
     def number(self):
         """Return a (multidigit) number consumed from the input."""
         result = ''
-        while self.current_char is not None and self.current_char.isdigit():
+        while self.current_char is not None and (self.current_char.isdigit() or self.current_char == '.'):
             result += self.current_char
             self.advance()
-        return int(result)
+        if result.count('.') > 1:
+            self.error()  # Handle invalid numbers with multiple decimal points
+        return float(result) if '.' in result else int(result)
 
     def get_next_token(self):
         """Lexical analyzer (also known as scanner or tokenizer)"""
