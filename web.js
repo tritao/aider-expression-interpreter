@@ -103,12 +103,13 @@ function initializeDebugger(bytecode) {
 		try {
 			debuggerInstance.step();
 			updateDebuggerUI(debuggerInstance);
-	    // Disable the step button if there are no more bytecodes to step through
-	    stepButton.disabled = debuggerInstance.pc >= debuggerInstance.bytecode.length;
-    } catch (e) {
+			// Disable the step button if there are no more bytecodes to step through
+			stepButton.disabled =
+				debuggerInstance.pc >= debuggerInstance.bytecode.length;
+		} catch (e) {
 			alert(e.message);
 		}
-  };
+	};
 }
 
 function updateDebuggerUI(debuggerInstance) {
