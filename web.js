@@ -24,7 +24,7 @@ document
 
 window.setExpression = function setExpression(expression) {
 	document.getElementById("expressionInput").value = expression;
-}
+};
 
 function evaluateExpression(expression) {
 	try {
