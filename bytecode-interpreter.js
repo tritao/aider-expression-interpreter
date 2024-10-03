@@ -1,3 +1,5 @@
+import { Bytecode } from "./bytecode.js";
+
 class BytecodeInterpreter {
 	constructor() {
 		this.stack = [];
