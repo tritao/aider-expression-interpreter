@@ -1,6 +1,6 @@
+import { createRequire } from "module";
 import fs from "node:fs";
 import { ASTToBytecode } from "./ast-to-bytecode.js";
-import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const { Module } = require("./bytecode_runner.js");
 import { BytecodeDisassembler } from "./bytecode-disassembler.js";
