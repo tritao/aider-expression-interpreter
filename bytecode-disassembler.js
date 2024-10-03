@@ -7,27 +7,27 @@ class BytecodeDisassembler {
 		while (i < bytecode.length) {
 			const opcode = bytecode[i];
 			switch (opcode) {
-				case Bytecode.PUSH:
+				case 0x01:
 					instructions.push(`PUSH ${bytecode[i + 1]}`);
 					i += 2;
 					break;
-				case Bytecode.ADD:
+				case 0x02:
 					instructions.push("ADD");
 					i += 1;
 					break;
-				case Bytecode.SUB:
+				case 0x03:
 					instructions.push("SUB");
 					i += 1;
 					break;
-				case Bytecode.MUL:
+				case 0x04:
 					instructions.push("MUL");
 					i += 1;
 					break;
-				case Bytecode.DIV:
+				case 0x05:
 					instructions.push("DIV");
 					i += 1;
 					break;
-				case Bytecode.HALT:
+				case 0x06:
 					instructions.push("HALT");
 					i += 1;
 					break;
