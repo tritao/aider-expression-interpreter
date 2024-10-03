@@ -9,9 +9,10 @@ document
 	.addEventListener("submit", (event) => {
 		event.preventDefault();
 		const expression = document.getElementById("expressionInput").value;
+		const interpreterType = document.getElementById("interpreterSelect").value;
 		try {
 			const { result, astTree, bytecodeStack, bytecode } =
-				evaluateExpression(expression);
+				evaluateExpression(expression, interpreterType);
 			document.getElementById("resultValue").innerText = result;
 			document.getElementById("bytecodeStack").innerHTML = bytecodeStack;
 			document.getElementById("astTree").innerText = astTree;
@@ -26,7 +27,7 @@ window.setExpression = function setExpression(expression) {
 	document.getElementById("expressionForm").requestSubmit();
 };
 
-function evaluateExpression(expression) {
+function evaluateExpression(expression, interpreterType) {
 	try {
 		const lexer = new Lexer(expression);
 		const tokens = lexer.tokenize();
@@ -37,7 +38,7 @@ function evaluateExpression(expression) {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-		const result = executeBytecode(bytecode);
+		const result = executeBytecode(bytecode, interpreterType);
 
 		const astTree = renderAST(ast);
 		const bytecodeStack = renderBytecodeStack(bytecode);
