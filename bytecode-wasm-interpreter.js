@@ -40,13 +40,9 @@ class BytecodeWasmInterpreter {
 		let result;
 		do {
 			result = this.interpreter.step();
-			const ip = this.interpreter.getIP();
-			const stack = this.interpreter.getStack();
-			console.log(`IP: ${ip}, Intermediate stack:`, stack);
 		} while (result > 0);
 
 		const stack = this.interpreter.getStack();
-		console.log("Final stack:", stack);
 		return stack;
 	}
 }
