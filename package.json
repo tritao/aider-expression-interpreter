@@ -4,12 +4,7 @@
 	"description": "A simple calculator parser implemented in JavaScript.",
 	"type": "module",
 	"main": "main.js",
-	"keywords": [
-		"calculator",
-		"parser",
-		"lexer",
-		"AST"
-	],
+	"keywords": ["calculator", "parser", "lexer", "AST"],
 	"author": "Your Name",
 	"license": "MIT",
 	"scripts": {
