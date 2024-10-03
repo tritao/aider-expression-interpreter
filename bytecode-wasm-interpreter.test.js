@@ -8,7 +8,7 @@ describe("BytecodeWasmInterpreter", () => {
 		return new Uint8Array(str.split(",").map(Number));
 	}
 
-	test("should execute simple bytecode", () => {
+	test("should execute simple bytecode", async () => {
 		const bytecodeStr = "1,10,1,20,2,6"; // Example bytecode: PUSH 10, PUSH 20, ADD, HALT
 		const bytecode = parseBytecode(bytecodeStr);
 		await interpreter.init(bytecode);
@@ -16,7 +16,7 @@ describe("BytecodeWasmInterpreter", () => {
 		expect(result).toEqual([30]); // Expect the stack to contain the result of 10 + 20
 	});
 
-	test("should handle empty bytecode", () => {
+	test("should handle empty bytecode", async () => {
 		const bytecodeStr = "";
 		const bytecode = parseBytecode(bytecodeStr);
 		await interpreter.init(bytecode);
