@@ -2,6 +2,7 @@
   "name": "calculator-parser",
   "version": "1.0.0",
   "description": "A simple calculator parser implemented in JavaScript.",
+  "type": "module",
   "main": "main.js",
   "scripts": {
     "test": "mocha test_lexer.js test_parser.js"
