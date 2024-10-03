@@ -85,3 +85,13 @@ class Lexer:
             self.error()
 
         return Token(EOF, None)
+
+    def tokenize(self):
+        """Tokenize the entire input text and return a list of tokens."""
+        tokens = []
+        token = self.get_next_token()
+        while token.type != EOF:
+            tokens.append(token)
+            token = self.get_next_token()
+        tokens.append(token)  # Append the EOF token
+        return tokens
