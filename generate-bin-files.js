@@ -7,7 +7,7 @@ import { Parser } from "./parser.js";
 
 const testFilesDir = "./test-files";
 
-fs.readdirSync(testFilesDir).forEach((file) => {
+for (const file of fs.readdirSync(testFilesDir)) {
 	if (file.endsWith(".txt")) {
 		const inputFilePath = path.join(testFilesDir, file);
 		const outputFilePath = inputFilePath.replace(".txt", ".bin");
@@ -31,4 +31,4 @@ fs.readdirSync(testFilesDir).forEach((file) => {
 			console.error(`Error processing ${file}: ${e.message}`);
 		}
 	}
-});
+}
