@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "bytecode_values.h"
 
+// #define ENABLE_DEBUG_PRINTS
+
 void init_interpreter(BytecodeInterpreter *interpreter, const unsigned char *bytecode, size_t length) {
 #ifdef ENABLE_DEBUG_PRINTS
     printf("Initializing interpreter with bytecode size: %zu\n", length);

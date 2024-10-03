@@ -16,6 +16,7 @@ class BytecodeWasmInterpreter {
 		}
 		this.instance = await BytecodeWasmInterpreter.moduleInstance;
 		this.interpreter = new this.instance.BytecodeInterpreter();
+		this.interpreter.init(bytecode)
 	}
 
 	execute(bytecode) {
@@ -23,15 +24,19 @@ class BytecodeWasmInterpreter {
 			throw new Error("WASM module not initialized");
 		}
 
+		if (!this.interpreter) {
+			throw new Error("WASM bytecode interpreter not initialized");
+		}
+
 		let result;
 		do {
-			result = this.instance.step();
-			const ip = this.instance.getIP();
-			const stack = this.instance.getStack();
+			result = this.interpreter.step();
+			const ip = this.interpreter.getIP();
+			const stack = this.interpreter.getStack();
 			console.log(`IP: ${ip}, Intermediate stack:`, stack);
 		} while (result > 0);
 
-		const stack = this.instance.getStack();
+		const stack = this.interpreter.getStack();
 		console.log("Final stack:", stack);
 		return stack;
 	}
