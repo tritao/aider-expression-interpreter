@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 body {
-	background-color: #f0f4f8; /* Light gray-blue background */
+    @apply bg-base-200; /* Use DaisyUI's base color for background */
 }
 #astTree {
-	white-space: pre-wrap;
-	font-family: monospace;
+    @apply whitespace-pre-wrap font-mono;
 }
