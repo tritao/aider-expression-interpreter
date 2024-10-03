@@ -14,9 +14,9 @@ class BytecodeWasmInterpreter {
 		if (!BytecodeWasmInterpreter.moduleInstance) {
 			BytecodeWasmInterpreter.moduleInstance = await Module();
 		}
-		this.instance = await BytecodeWasmInterpreter.moduleInstance;
+		this.instance = BytecodeWasmInterpreter.moduleInstance;
 		this.interpreter = new this.instance.BytecodeInterpreter();
-		this.interpreter.init(bytecode)
+		this.interpreter.init(bytecode);
 	}
 
 	execute(bytecode) {

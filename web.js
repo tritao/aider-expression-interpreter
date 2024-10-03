@@ -6,12 +6,12 @@ import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
 
 document
 	.getElementById("expressionForm")
-	.addEventListener("submit", (event) => {
+	.addEventListener("submit", async (event) => {
 		event.preventDefault();
 		const expression = document.getElementById("expressionInput").value;
 		const interpreterType = document.getElementById("interpreterSelect").value;
 		try {
-			const { result, astTree, bytecodeStack, bytecode } = evaluateExpression(
+			const { result, astTree, bytecodeStack, bytecode } = await evaluateExpression(
 				expression,
 				interpreterType,
 			);
@@ -55,10 +55,10 @@ async function evaluateExpression(expression, interpreterType) {
 	}
 }
 
-document.getElementById("resetButton").onclick = () => {
+document.getElementById("resetButton").onclick = async () => {
 	const expression = document.getElementById("expressionInput").value;
 	try {
-		const { bytecode } = evaluateExpression(expression);
+		const { bytecode } = await evaluateExpression(expression);
 		initializeDebugger(bytecode);
 	} catch (e) {
 		alert(e.message);
@@ -82,6 +82,7 @@ async function executeBytecode(bytecode, interpreterType = "js") {
 	}
 	return result;
 }
+
 function renderAST(node, depth = 0) {
 	let result = "";
 	const indent = "  ".repeat(depth);
