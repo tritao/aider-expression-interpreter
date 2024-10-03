@@ -1,6 +1,6 @@
 import { ASTToBytecode } from "./ast-to-bytecode.js";
-import { BytecodeInterpreter } from "./bytecode-interpreter.js";
 import { BytecodeDebugger } from "./bytecode-debugger.js";
+import { BytecodeInterpreter } from "./bytecode-interpreter.js";
 import { Lexer } from "./lexer.js";
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
 
@@ -9,20 +9,21 @@ document
 	.addEventListener("submit", (event) => {
 		event.preventDefault();
 		const expression = document.getElementById("expressionInput").value;
-        try {
-            const { result, astTree, bytecodeStack, bytecode } = evaluateExpression(expression);
-            document.getElementById("result").innerHTML = `
+		try {
+			const { result, astTree, bytecodeStack, bytecode } =
+				evaluateExpression(expression);
+			document.getElementById("result").innerHTML = `
                 <h2>Result: ${result}</h2>
                 <h2>Bytecode Stack:</h2>
                 <pre>${bytecodeStack}</pre>
                 <h2>AST:</h2>
                 <pre>${astTree}</pre>
             `;
-            initializeDebugger(bytecode);
-        } catch (e) {
-            document.getElementById("result").innerHTML = `<h2>${e.message}</h2>`;
-        }
-    });
+			initializeDebugger(bytecode);
+		} catch (e) {
+			document.getElementById("result").innerHTML = `<h2>${e.message}</h2>`;
+		}
+	});
 
 window.setExpression = function setExpression(expression) {
 	document.getElementById("expressionInput").value = expression;
@@ -97,8 +98,10 @@ function initializeDebugger(bytecode) {
 }
 
 function updateDebuggerUI(debuggerInstance) {
-	document.getElementById("debuggerStack").innerText = `Stack: ${debuggerInstance.stack.join(", ")}`;
-	document.getElementById("debuggerPC").innerText = `Program Counter: ${debuggerInstance.pc}`;
+	document.getElementById("debuggerStack").innerText =
+		`Stack: ${debuggerInstance.stack.join(", ")}`;
+	document.getElementById("debuggerPC").innerText =
+		`Program Counter: ${debuggerInstance.pc}`;
 }
 
 export { evaluateExpression };
