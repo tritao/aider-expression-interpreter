@@ -14,11 +14,6 @@ class BytecodeWasmInterpreter {
 		this.interpreter = new this.instance.BytecodeInterpreter();
 	}
 
-	async init(bytecode) 
-		if (!bytecode) {
-			throw new Error("Bytecode must be provided for initialization");
-		}
-		this.instance = await Module();
 
 	execute(bytecode) {
 		if (!this.instance) {
