@@ -2,6 +2,22 @@ import { ASTToBytecode } from "./ast-to-bytecode.js";
 import { BytecodeDebugger } from "./bytecode-debugger.js";
 import { BytecodeInterpreter } from "./bytecode-interpreter.js";
 import { Lexer } from "./lexer.js";
+
+let wasmModule;
+
+async function loadWasm() {
+	try {
+		const response = await fetch('/bytecode_runner.wasm');
+		const buffer = await response.arrayBuffer();
+		const { instance } = await WebAssembly.instantiate(buffer);
+		wasmModule = instance.exports;
+		console.log("WASM Module loaded successfully");
+	} catch (e) {
+		console.error("Failed to load WASM module:", e);
+	}
+}
+
+loadWasm();
 import { BinaryOpNode, NumberNode, Parser } from "./parser.js";
 
 document
@@ -37,8 +53,15 @@ function evaluateExpression(expression) {
 		const converter = new ASTToBytecode();
 		const bytecode = converter.convert(ast);
 
-		const interpreter = new BytecodeInterpreter();
-		const result = interpreter.execute(bytecode);
+		let result;
+		if (wasmModule) {
+			const memory = new Uint8Array(wasmModule.memory.buffer);
+			memory.set(bytecode, 0);
+			result = wasmModule.run();
+		} else {
+			const interpreter = new BytecodeInterpreter();
+			result = interpreter.execute(bytecode);
+		}
 		const astTree = renderAST(ast);
 		const bytecodeStack = renderBytecodeStack(bytecode);
 		return {
