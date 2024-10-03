@@ -62,9 +62,21 @@ document.getElementById("resetButton").onclick = () => {
 	}
 };
 
-function executeBytecode(bytecode) {
-	const interpreter = new BytecodeInterpreter();
-	return interpreter.execute(bytecode);
+import { BytecodeWasmInterpreter } from "./bytecode-wasm-interpreter.js";
+
+async function executeBytecode(bytecode, interpreterType = "js") {
+	let result;
+	if (interpreterType === "js") {
+		const interpreter = new BytecodeInterpreter();
+		result = interpreter.execute(bytecode);
+	} else if (interpreterType === "wasm") {
+		const interpreter = new BytecodeWasmInterpreter();
+		await interpreter.init(bytecode);
+		result = interpreter.execute();
+	} else {
+		throw new Error(`Unknown interpreter type: ${interpreterType}`);
+	}
+	return result;
 }
 function renderAST(node, depth = 0) {
 	let result = "";
