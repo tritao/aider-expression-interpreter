@@ -7,7 +7,7 @@
 	"keywords": ["calculator", "parser", "lexer", "AST"],
 	"author": "Your Name",
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": { "vite": "^5.4.8" },
 	"devDependencies": {
 		"@biomejs/biome": "1.9.3",
 		"@types/bun": "latest",
